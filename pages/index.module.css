@@ -1,0 +1,8 @@
+.spacer {
+    margin-bottom: 21px;
+}
+
+.redioWarper {
+    display: flex;
+    justify-content: space-between;
+}
