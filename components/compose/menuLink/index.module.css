@@ -1,0 +1,31 @@
+.menuLink {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-right: 5px solid transparent;
+    cursor: pointer;
+    margin-bottom: 27px;
+}
+
+.menuLink.active {
+    color: #EAB600;
+    border-right: 5px solid #EAB600;
+}
+
+.menuLink.active>.menuLabel {
+    color: #EAB600;
+}
+
+.menuLabel {
+    font-size: 16px;
+    margin-left: 19px;
+}
+
+.menuLink:hover {
+    color: #EAB600;
+    border-right: 5px solid #EAB600;
+}
+
+.menuLink:hover>.menuLabel {
+    color: #EAB600;
+}
