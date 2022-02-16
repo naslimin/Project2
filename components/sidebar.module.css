@@ -1,12 +1,14 @@
 .nav {
   display: flex;
   flex-direction: column;
-  width: 350px;
+  width: 220px;
+  min-width: 220px;
   background-color: #ffffff;
   padding-top: 32px;
   padding-right: 0px;
   padding-bottom: 32px;
   padding-left: 32px;
+  justify-content: space-between;
 }
 
 .nav>a {
@@ -62,4 +64,12 @@
   color: #000000;
   left: 27px;
   padding-right: 10px;
+}
+
+.imageClassRoom {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  overflow: hidden;
+  width:203px;
+  height:154px;
 }

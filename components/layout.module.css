@@ -4,6 +4,10 @@
   background: rgba(245, 222, 141, 0.5);
 }
 
-.main > section {
+.main>section {
   padding: 32px;
+}
+
+.secbar {
+  padding: 40px;
 }

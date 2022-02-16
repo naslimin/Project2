@@ -35,7 +35,7 @@ export default function Sidebar() {
       name: 'Setting'
     },
     {
-      to: 'logout',
+      to: '/',
       icon: '/menuIcon/home.png',
       iconHover: "/menuIcon/home_hover.png",
       name: 'Log out'
@@ -44,21 +44,25 @@ export default function Sidebar() {
 
   return (
     <nav className={styles.nav}>
-      <div className={styles.logoClass}>
-        <div className={styles.logoText}>
-          BWK School
+      <div>
+        <div className={styles.logoClass}>
+          <div className={styles.logoText}>
+            BWK School
+          </div>
+          <Image src="/logo.png" alt="Logo" width="73" height="68" ></Image>
         </div>
-        <Image src="/logo.png" alt="Logo" width="73" height="68" ></Image>
+
+        {
+          menuItem.map((item, i) => {
+            return <MenuLink key={i} to={item.to} icon={item.icon} iconHover={item.iconHover}>
+              {item.name}
+            </MenuLink>
+          })
+        }
       </div>
-
-      {
-        menuItem.map((item, i) => {
-          return <MenuLink key={i} to={item.to} icon={item.icon} iconHover={item.iconHover}>
-            {item.name}
-          </MenuLink>
-        })
-      }
-
+      <div className={styles.imageClassRoom}>
+        <Image src="/demoImage/pexels-max-fischer-5212345.jpeg" alt="Logo" width="203" height="154" ></Image>
+      </div>
     </nav>
   )
 }

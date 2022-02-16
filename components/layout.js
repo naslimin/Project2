@@ -1,13 +1,22 @@
 import Head from 'next/head'
+import ActivityBox from './compose/activityBox'
+import UserLoginBox from './compose/userLoginBox'
 import styles from './layout.module.css'
-
-export default function Layout({ children ,title}) {
+import Sidebar from './sidebar'
+export default function Layout({ children, title }) {
   return (
     <>
       <Head>
         <title>{title}</title>
       </Head>
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main}>
+        <Sidebar />
+        {children}
+        <div className={styles.secbar}>
+          <UserLoginBox />
+          <ActivityBox />
+        </div>
+      </main>
     </>
   )
 }
