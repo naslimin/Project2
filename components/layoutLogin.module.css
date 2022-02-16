@@ -1,0 +1,70 @@
+.main {
+    display: flex;
+    background-color: #fedc7f;
+    background-image: url('/circle_vector.svg'), url('/bg_main.png');
+    background-repeat: no-repeat, no-repeat;
+    background-size: 40px, contain;
+    background-position: 0.35% 0.57%, right center;
+    min-height: 100vh;
+    height: 100%;
+    background-attachment: fixed;
+}
+
+.welcomeText {
+    position: absolute;
+    width: 385px;
+    height: 87px;
+    left: 150px;
+    top: 60px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 64px;
+    line-height: 87px;
+    letter-spacing: 0.2em;
+    color: #000000;
+}
+
+.titleText {
+    position: absolute;
+    width: 381px;
+    height: 34px;
+    left: 152px;
+    top: 163px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 28px;
+    line-height: 34px;
+    color: #000000;
+}
+
+.boxLogin {
+    position: absolute;
+    width: calc(353px - (46px + 46px));
+    left: 166px;
+    top: 228px;
+    background: #F3F3F3;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 35px;
+    padding-top: 25px;
+    padding-right: 46px;
+    padding-bottom: 100px;
+    padding-left: 46px;
+}
+
+.loginBTN {
+    cursor: pointer;
+    width: 136px;
+    height: 52px;
+    right: -30px;
+    bottom: -25px;
+    background: #000000;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border-radius: 6px;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: absolute;
+}
