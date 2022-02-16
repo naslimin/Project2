@@ -19,6 +19,8 @@
 .menuLabel {
     font-size: 16px;
     margin-left: 19px;
+    font-family: 'Allerta', 'Noto Sans Thai', sans-serif;
+    font-weight: bold;
 }
 
 .menuLink:hover {
