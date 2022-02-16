@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import styles from './layoutLogin.module.css'
 
-export default function LayoutLogin({ children }) {
+export default function LayoutLogin({ children ,href}) {
   return (
     <>
       <Head>
@@ -13,8 +13,6 @@ export default function LayoutLogin({ children }) {
           <h2 className={`${styles.fontText} ${styles.titleText} fontText`}>โรงเรียนบ้านวังกะพ้อ เพียรอนุสรณ์</h2>
           <div className={styles.boxLogin}>
             {children}
-
-            <div className={`${styles.loginBTN} fontText`}>Login</div>
           </div>
         </div>
 
