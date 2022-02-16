@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@700&family=Aleo&family=Noto+Sans+Thai&display=swap');
+
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+  font-size: 24px;
+  font-family: 'Aleo', 'Noto Sans Thai', sans-serif;
+}
+
+.fontTextSC {
+  font-family: 'Alegreya SC', serif;
+  font-style: normal;
+  font-weight: bold;
+}
