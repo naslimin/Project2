@@ -1,0 +1,9 @@
+.main {
+  display: flex;
+  height: 100vh;
+  background: rgba(245, 222, 141, 0.5);
+}
+
+.main > section {
+  padding: 32px;
+}
