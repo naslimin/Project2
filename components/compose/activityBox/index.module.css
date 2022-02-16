@@ -1,0 +1,44 @@
+.box {
+    width: 250px;
+    height: calc(100% - 170px);
+    padding-top: 15px;
+    padding-right: 40px;
+    padding-bottom: 40px;
+    padding-left: 40px;
+    background: #FFFFFF;
+    border-radius: 20px;
+}
+
+.titleText {
+    font-family: Alegreya Sans, 'Noto Sans Thai', sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: bold;
+    border-bottom: 1px solid #000;
+    line-height: 45px;
+}
+
+.ulList {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 25px;
+}
+
+.listText {
+    font-family: 'Actor', 'Noto Sans Thai', sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: normal;
+    margin-bottom: 15px;
+    line-height: 22px;
+}
+
+.listText::before {
+    content: "•";
+    font-size: 50px;
+    color: #000;
+    position: absolute;
+    margin-inline-start: -30px;
+    margin-top: -3px;
+}
