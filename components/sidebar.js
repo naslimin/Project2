@@ -7,43 +7,36 @@ export default function Sidebar() {
     {
       to: 'home',
       icon: '/menuIcon/home.png',
-      iconHover: "/menuIcon/home_hover.png",
       name: 'Home'
     },
     {
       to: 'dashboard',
       icon: '/menuIcon/dashboard.png',
-      iconHover: "/menuIcon/dashboard_hover.png",
       name: 'Dashboard'
     },
     {
       to: 'event',
       icon: '/menuIcon/events.png',
-      iconHover: "/menuIcon/events_hover.png",
       name: 'Event'
     },
     {
       to: 'userInfo',
       icon: '/user_blank.png',
-      iconHover: "/user_blank.png",
       name: 'ข้อมูลส่วนตัว'
     },
     {
       to: 'leaveform',
       icon: '/menuIcon/leaveform.png',
-      iconHover: "/menuIcon/leaveform_hover.png",
       name: 'แบบฟร์อมการลางาน'
     },
     {
       to: 'setting',
       icon: '/menuIcon/setting.png',
-      iconHover: "/menuIcon/setting_hover.png",
       name: 'Setting'
     },
     {
       to: '/',
       icon: '/menuIcon/logout.png',
-      iconHover: "/menuIcon/logout.png",
       name: 'Log out'
     }
   ]
@@ -60,7 +53,7 @@ export default function Sidebar() {
 
         {
           menuItem.map((item, i) => {
-            return <MenuLink key={i} to={item.to} icon={item.icon} iconHover={item.iconHover}>
+            return <MenuLink key={i} to={item.to} icon={item.icon}>
               {item.name}
             </MenuLink>
           })

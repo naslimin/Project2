@@ -8,12 +8,13 @@
 }
 
 .menuLink.active {
-    color: #EAB600;
-    border-right: 5px solid #EAB600;
+    color: #000;
+    border-right: 5px solid #000;
+    filter: invert(71%) sepia(59%) saturate(1223%) hue-rotate(3deg) brightness(95%) contrast(103%);
 }
 
 .menuLink.active>.menuLabel {
-    color: #EAB600;
+    color: #000;
 }
 
 .menuLabel {
@@ -24,10 +25,11 @@
 }
 
 .menuLink:hover {
-    color: #EAB600;
-    border-right: 5px solid #EAB600;
+    color: #000;
+    border-right: 5px solid #000;
+    filter: invert(71%) sepia(59%) saturate(1223%) hue-rotate(3deg) brightness(95%) contrast(103%);
 }
 
 .menuLink:hover>.menuLabel {
-    color: #EAB600;
+    color: #000;
 }
