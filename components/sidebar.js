@@ -12,32 +12,38 @@ export default function Sidebar() {
     },
     {
       to: 'dashboard',
-      icon: '/menuIcon/home.png',
-      iconHover: "/menuIcon/home_hover.png",
+      icon: '/menuIcon/dashboard.png',
+      iconHover: "/menuIcon/dashboard_hover.png",
       name: 'Dashboard'
     },
     {
       to: 'event',
-      icon: '/menuIcon/home.png',
-      iconHover: "/menuIcon/home_hover.png",
+      icon: '/menuIcon/events.png',
+      iconHover: "/menuIcon/events_hover.png",
       name: 'Event'
     },
     {
       to: 'userInfo',
-      icon: '/menuIcon/home.png',
-      iconHover: "/menuIcon/home_hover.png",
+      icon: '/user_blank.png',
+      iconHover: "/user_blank.png",
       name: 'ข้อมูลส่วนตัว'
     },
     {
+      to: 'leaveform',
+      icon: '/menuIcon/leaveform.png',
+      iconHover: "/menuIcon/leaveform_hover.png",
+      name: 'แบบฟร์อมการลางาน'
+    },
+    {
       to: 'setting',
-      icon: '/menuIcon/home.png',
-      iconHover: "/menuIcon/home_hover.png",
+      icon: '/menuIcon/setting.png',
+      iconHover: "/menuIcon/setting_hover.png",
       name: 'Setting'
     },
     {
       to: '/',
-      icon: '/menuIcon/home.png',
-      iconHover: "/menuIcon/home_hover.png",
+      icon: '/menuIcon/logout.png',
+      iconHover: "/menuIcon/logout.png",
       name: 'Log out'
     }
   ]
