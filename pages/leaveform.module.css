@@ -1,0 +1,122 @@
+.form {
+    width: 90%;
+    margin: auto;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.mb15 {
+    margin-bottom: 15px;
+}
+
+.mb30 {
+    margin-bottom: 30px;
+}
+
+.lineWarper {
+    display: flex;
+    align-items: center;
+}
+
+.lineWarperRight {
+    justify-content: end;
+}
+
+.lineWarperBetween {
+    justify-content: space-between;
+}
+
+.inputWarper {
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.radioWarper {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.textFont {
+    font-size: 16px;
+    font-family: 'Aleo', 'Noto Sans Thai', sans-serif;
+}
+
+p.textFont {
+    padding: 0;
+    margin: 0;
+}
+
+.radioBox {
+    height: 16px;
+    width: 20px;
+    margin-left: 15%;
+}
+
+.radioBoxInline {
+    height: 16px;
+    width: 20px;
+}
+
+.vw4 {
+    width: 4rem;
+}
+
+.vw5 {
+    width: 5rem;
+}
+
+.vw6 {
+    width: 6rem;
+}
+
+.vw7 {
+    width: 7rem;
+}
+
+.vw8 {
+    width: 8rem;
+}
+
+.vw9 {
+    width: 9rem;
+}
+
+.vw10 {
+    width: 10rem;
+}
+
+.vw15 {
+    width: 15rem;
+}
+
+.vw19 {
+    width: 19rem;
+}
+
+.vw20 {
+    width: 20rem;
+}
+
+.vw25 {
+    width: 25rem;
+}
+
+.vw35 {
+    width: 35rem;
+}
+
+.vw36 {
+    width: 36rem;
+}
+
+.wp30 {
+    width: 30%;
+}
+
+.wp100 {
+    width: 100%;
+}
