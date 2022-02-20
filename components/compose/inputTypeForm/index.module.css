@@ -1,0 +1,31 @@
+.inputType {
+  width: -webkit-fill-available;
+  height: 20px;
+  background: #fff;
+  border: 0px;
+  border-radius: 10px;
+  color: black;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  font-family: 'Aleo', 'Noto Sans Thai', sans-serif;
+}
+
+.inputType::placeholder {
+  color: black;
+  opacity: 1;
+
+  font-family: 'Aleo', 'Noto Sans Thai', sans-serif;
+}
+
+.inputType:-ms-input-placeholder {
+  color: black;
+
+  font-family: 'Aleo', 'Noto Sans Thai', sans-serif;
+}
+
+.inputType::-ms-input-placeholder {
+  color: black;
+
+  font-family: 'Aleo', 'Noto Sans Thai', sans-serif;
+}
