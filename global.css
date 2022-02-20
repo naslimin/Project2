@@ -12,8 +12,63 @@ body {
   font-family: 'Aleo', 'Noto Sans Thai', sans-serif;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .fontTextSC {
   font-family: 'Alegreya SC', serif;
   font-style: normal;
   font-weight: bold;
+}
+
+.rbc-month-view {
+  border: 0px !important;
+}
+
+.rbc-day-bg+.rbc-day-bg {
+  border: 0px !important;
+}
+
+.rbc-month-row+.rbc-month-row {
+  border: 0px !important;
+}
+
+.rbc-header {
+  border: 0px !important;
+  background-color: #fff;
+  padding: 0px !important;
+}
+
+.rbc-off-range {
+  color: #d3d3d3 !important;
+}
+
+.rbc-event, .rbc-day-slot .rbc-background-event {
+  background-color: #31ad8e !important;
+  border: 2px solid #fff !important;
+  border-radius: 25px !important;
+  font-size: 14px;
+  box-shadow: 1px 1px 2px 0px #00000040 !important;
+}
+
+.rbc-row-content {
+  height: inherit;
+}
+
+.rbc-row-bg {
+  background-color: #fff;
+}
+
+.rbc-off-range-bg {
+  background: #fff !important;
+}
+
+.rbc-date-cell {
+  justify-content: center;
+  align-items: baseline;
+  display: flex;
+}
+.rbc-today {
+  background-color: transparent !important;
 }

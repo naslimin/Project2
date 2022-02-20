@@ -6,6 +6,12 @@
 
 .main>section {
   padding: 32px;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.main>section::-webkit-scrollbar {
+  display: none;
 }
 
 .secbar {

@@ -1,0 +1,182 @@
+.CalendarHeaderBox {
+    background-color: #fcc94e;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 10px 0px #0000002e;
+}
+
+.CalendarHeaderText {
+    font-family: 'Allerta', 'Noto Sans Thai', sans-serif;
+}
+
+.CalendarHeader1 {
+    border-bottom-right-radius: 50px;
+    border-right-color: #fff;
+    border-right-style: solid;
+    border-right-width: 2px;
+    border-bottom-color: #fff;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+}
+
+.CalendarHeader2 {
+    border-bottom-left-radius: 50px;
+    border-left-color: #fff;
+    border-left-style: solid;
+    border-left-width: 2px;
+    border-bottom-color: #fff;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+}
+
+.fontDate {
+    font-size: 14px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 5px);
+    max-width: 14.2857%;
+    width: 100%;
+    font-family: 'Allerta', 'Noto Sans Thai', sans-serif;
+}
+
+.fontDay {
+    color: #898989;
+    font-size: 12px;
+    border-bottom: 2px solid #f4f8f9;
+    margin-bottom: 10px;
+    height: 40px;
+    line-height: 40px;
+    font-family: 'Allerta', 'Noto Sans Thai', sans-serif;
+}
+
+.bgCalenDarOuter {
+    overflow: hidden;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 0px;
+    padding-left: 20px;
+    border-radius: 30px;
+    background-color: #fff;
+}
+
+.bgCalenDar {
+    background-color: #fff;
+    box-shadow: 0px 10px 20px 0px #0000002e;
+    overflow: hidden;
+}
+
+.focusDate {
+    background-color: #f8fafa !important;
+    border: 2px solid #fff !important;
+    border-radius: 50px !important;
+    font-size: 14px;
+    box-shadow: 1px 1px 2px 0px #00000040 !important;
+    color: #000;
+}
+
+.checkin {
+    background-color: #89d7c9 !important;
+    border: 2px solid #fff !important;
+    color: #fff;
+}
+
+.checkrate {
+    background-color: #89d7c9 !important;
+    border: 2px solid #fff !important;
+    color: #fff;
+    opacity: 0.5;
+}
+
+.warperCalendarHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.boxNav {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.navbtn {
+    color: #d3d3d3;
+    cursor: pointer;
+}
+
+.next {
+    padding-right: 30px;
+}
+
+.prev {
+    padding-left: 30px;
+}
+
+.eventBox {
+    background-color: #f8fafa;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.eventWarper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    background-color: #fff;
+    margin-bottom: 15px;
+    border-left: 5px solid #fcc94e;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: 0px 5px 8px 0px #00000017;
+}
+
+.eventWarperTitle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.upcommingHeader {
+    font-size: 16px;
+    color: #d3d3d3;
+    font-family: 'Allerta', 'Noto Sans Thai', sans-serif;
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 15px;
+}
+
+.eventTitle {
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+    margin-bottom:8px;
+}
+
+.eventMonth {
+    font-size: 14px;
+    color: #d3d3d3;
+    margin: 0;
+    padding: 0;
+}
+
+.eventDate {
+    background-color: #f8fafa !important;
+    border: 2px solid #fff !important;
+    border-radius: 50px !important;
+    font-size: 14px;
+    box-shadow: 1px 1px 2px 0px #00000040 !important;
+    color: #000;
+    background-color: #89d7c9 !important;
+    border: 2px solid #fff !important;
+    color: #fff;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-inline: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
