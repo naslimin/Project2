@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import AvatarUser from '../AvatarUser'
 import styles from './index.module.css'
 
 export default function UserLoginBox({ }) {
@@ -10,9 +11,7 @@ export default function UserLoginBox({ }) {
       </div>
       <div className={styles.user}>
         <div className={styles.username}>ภาตีเมาะ ดือรามะ</div>
-        <div className={styles.avatar}>
-          <Image src="/demoImage/39cd1f2a-6b6b-4199-98ab-a80f629e5e51.jpeg" alt="Avatar" width="60" height="60" />
-        </div>
+        <AvatarUser/>
       </div>
     </div>
   )
