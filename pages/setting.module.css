@@ -1,0 +1,36 @@
+.form {
+    min-width: 451px;
+    min-height: 476px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #FFFFFF;
+    border-radius: 20px;
+    position: relative;
+}
+
+.titleBox {
+    width: 100%;
+}
+
+.titleText {
+    padding-left: 50px;
+    padding-right: 50px;
+    font-family: Alegreya Sans, 'Noto Sans Thai', sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: bold;
+    border-bottom: 1px solid #000;
+    line-height: 45px;
+}
+.titleText2 {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-family: Alegreya Sans, 'Noto Sans Thai', sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: bold;
+}
