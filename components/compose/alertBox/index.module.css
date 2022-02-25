@@ -1,0 +1,33 @@
+.boxWarper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    background: rgba(196, 196, 196, 0.9);
+    right: 0px;
+    z-index: 1;
+}
+
+.box {
+    width: 561px;
+    height: 165px;
+    background: #FFFDFD;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.box>p {
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Aleo', 'Noto Sans Thai', sans-serif;
+}
