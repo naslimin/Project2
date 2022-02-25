@@ -1,4 +1,4 @@
-import Image from 'next/image'
+// import Image from 'next/image'
 import AvatarUser from '../components/compose/AvatarUser'
 import Layout from '../components/layout'
 import styles from './userinfo.module.css'
@@ -14,7 +14,7 @@ export default function UserInfo() {
 
         <div className={`${styles.warperbox}`}>
           <div className={`${styles.iconWarper}`}>
-            <Image width={20} height={20} src="/icon/menu.png"></Image>
+            <img width={20} height={20} src="/icon/menu.png"></img>
           </div>
           <p className={`${styles.title}`}>ข้อมูลพื้นฐาน</p>
         </div>
@@ -31,7 +31,7 @@ export default function UserInfo() {
 
         <div className={`${styles.warperbox}`}>
           <div className={`${styles.iconWarper}`}>
-            <Image width={20} height={20} src="/icon/menu.png"></Image>
+            <img width={20} height={20} src="/icon/menu.png"></img>
           </div>
           <p className={`${styles.title}`}>ข้อมูลด้านการสอน</p>
         </div>

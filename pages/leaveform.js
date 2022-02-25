@@ -1,4 +1,4 @@
-import Image from 'next/image'
+// import Image from 'next/image'
 import { useState } from 'react'
 import AlertBox from '../components/compose/alertBox'
 import InputTypeForm from '../components/compose/inputTypeForm'
@@ -180,7 +180,7 @@ export default function LeaveForm() {
           <div className={`${styles.lineWarper} ${styles.alignBaseline} ${styles.lineWarperBetween}`}>
             <div className={`${styles.lineWarper}`}>
               <div className={`${styles.clipfile}`}>
-                <Image src={`/menuicon/clip.png`} alt="icon menu" width="6" height="18" />
+                <img src={`/menuicon/clip.png`} alt="icon menu" width="6" height="18" />
               </div>
               <p className={`${styles.textFont}`}>เอกสารแนบ</p>
             </div>

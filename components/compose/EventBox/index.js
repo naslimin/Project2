@@ -1,4 +1,4 @@
-import Image from 'next/image'
+// import Image from 'next/image'
 import styles from './index.module.css'
 import moment from 'moment';
 moment.locale('en-GB');
@@ -6,7 +6,7 @@ export default function EventBox({ element }) {
   return (
     <div className={styles.warper}>
       <div className={styles.warperOptions}>
-        <Image src='/icon/options.png' width={20} height={20} ></Image>
+        <img src='/icon/options.png' width={20} height={20} ></img>
       </div>
       <div className={`${styles.warperBox}`}>
         <div className={`${styles.warperBoxBody}`}>
@@ -25,7 +25,7 @@ export default function EventBox({ element }) {
           </p>
         </div>
         <div className={`${styles.warperBoxBodyImage}`}>
-          <Image src='/icon/Signature.png' width={160} height={91} ></Image>
+          <img src='/icon/Signature.png' width={160} height={91} ></img>
           <p className={`${styles.text} {styles.textMain}`}>-Signature-</p>
         </div>
       </div>

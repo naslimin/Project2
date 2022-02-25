@@ -1,4 +1,4 @@
-import Image from 'next/image'
+// import Image from 'next/image'
 import MenuLink from './compose/menuLink'
 import styles from './sidebar.module.css'
 export default function Sidebar() {
@@ -48,7 +48,7 @@ export default function Sidebar() {
           <div className={styles.logoText}>
             BWK School
           </div>
-          <Image src="/logo.png" alt="Logo" width="73" height="68" ></Image>
+          <img className={styles.zIndex} src="/logo.png" alt="Logo" width="73" height="68" ></img>
         </div>
 
         {
@@ -60,7 +60,7 @@ export default function Sidebar() {
         }
       </div>
       <div className={styles.imageClassRoom}>
-        <Image src="/demoImage/pexels-max-fischer-5212345.jpeg" alt="Logo" width="203" height="154" ></Image>
+        <img src="/demoImage/pexels-max-fischer-5212345.jpeg" alt="Logo" width="203" height="154" ></img>
       </div>
     </nav>
   )

@@ -47,7 +47,9 @@
   align-items: center;
   margin-bottom: 38px;
 }
-
+.zIndex{
+  z-index: 99;
+}
 .logoText {
   background: #FBDF7B;
   border-radius: 4px;
@@ -63,6 +65,7 @@
   align-items: center;
   color: #000000;
   left: 27px;
+  z-index: 0;
   padding-right: 10px;
 }
 
