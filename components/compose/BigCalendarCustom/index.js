@@ -61,8 +61,8 @@ class MyCustomDateHeader extends React.Component {
 }
 
 const ListEvents = () => {
-  return events.map(element => {
-    return <div className={`${styles.eventWarper}`}>
+  return events.map((element,i) => {
+    return <div key={`ListEvents_${i}`} className={`${styles.eventWarper}`}>
       <div className={`${styles.eventWarperTitle}`}>
         <p className={`${styles.eventTitle}`}>{element.desc}</p>
         <p className={`${styles.eventMonth}`}>{moment(element.start).format("MMM")} {NameDay[moment(element.start).format('ddd')]}</p>
