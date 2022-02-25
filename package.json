@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build && next export -o html/public",
-    "start": "next start"
+    "start": "next start",
+    "deploy":"cd html && firebase deploy"
   },
   "dependencies": {
     "moment": "^2.29.1",
