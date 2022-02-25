@@ -2,7 +2,6 @@ import Image from 'next/image'
 import styles from './index.module.css'
 import Link from 'next/link'
 import { useRouter } from "next/router";
-import { useState } from 'react'
 export default function MenuLink({ to, icon, children }) {
   const router = useRouter();
   return (
