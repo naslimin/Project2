@@ -1,0 +1,72 @@
+.warper {
+    min-width: 459px;
+    min-height: 135px;
+    margin-bottom: 30px;
+    background: #FFFDFD;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    position: relative;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+}
+
+.warperBox {
+    display: flex;
+    justify-content:space-between;
+}
+
+.warperBoxBody {
+    display: flex;
+    flex-direction: column;
+}
+.warperBoxBodyImage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
+}
+.warperOptions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.mtauto {
+    margin-top: auto !important;
+}
+
+.text {
+    font-family: Alef, 'Noto Sans Thai', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+}
+
+.textMain {
+    color: #000000;
+}
+
+.textSub {
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.textBold {
+    font-weight: bold;
+}
+
+.textP {
+    padding-right: 3px;
+}
+
+.textIndexDate {
+    padding-left: 20px;
+}
+
+.textIndexTime {
+    padding-left: 40px;
+}
