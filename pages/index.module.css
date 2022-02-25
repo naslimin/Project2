@@ -24,3 +24,52 @@
     display: flex;
     position: absolute;
 }
+
+.textTitle {
+    font-family: Alegreya Sans, 'Noto Sans Thai', sans-serif;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.imagePreview {
+    font-family: Aleo;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    min-height: 121px;
+    background: #C4C4C4;
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boxBtnUpload {
+    display: flex;
+}
+
+.uploadBtn {
+    min-width: 81px;
+    min-height: 23px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Aleo;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background: #C4C4C4;
+    color: #000000;
+    border-radius: 25px;
+    margin-right: 10px;
+    cursor: pointer;
+}
