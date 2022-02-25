@@ -8,6 +8,7 @@ export default function Layout({ children, title }) {
     <>
       <Head>
         <title>{title}</title>
+        <meta name="viewport" content="width=1920"></meta>
       </Head>
       <main className={styles.main}>
         <Sidebar />
