@@ -1,7 +1,11 @@
+import Image from 'next/image'
+import { useState } from 'react'
+import AlertBox from '../components/compose/alertBox'
 import InputTypeForm from '../components/compose/inputTypeForm'
 import Layout from '../components/layout'
 import styles from './leaveform.module.css'
 export default function LeaveForm() {
+  const [ showAlert, setShowAlert ] = useState(false);
   return (
     <section>
       <h2>แบบฟร์อมการลางาน</h2>
@@ -103,16 +107,16 @@ export default function LeaveForm() {
           </div>
         </div>
         <div className={`${styles.mb15}`}>
-          <div className={`${styles.lineWarper}`}>
+          <div className={`${styles.lineWarper} ${styles.lineWarperBetween}`}>
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>ตั้งแต่วันที่</p>
-              <div className={`${styles.inputWarper} ${styles.vw19}`}>
+              <div className={`${styles.inputWarper} ${styles.vw18}`}>
                 <InputTypeForm type="text"></InputTypeForm>
               </div>
             </div>
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>ถึงวันที่</p>
-              <div className={`${styles.inputWarper} ${styles.vw19}`}>
+              <div className={`${styles.inputWarper} ${styles.vw18}`}>
                 <InputTypeForm type="text"></InputTypeForm>
               </div>
             </div>
@@ -149,7 +153,7 @@ export default function LeaveForm() {
           <div className={`${styles.lineWarper}`}>
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>ถึงวันที่</p>
-              <div className={`${styles.inputWarper} ${styles.vw19}`}>
+              <div className={`${styles.inputWarper} ${styles.vw18}`}>
                 <InputTypeForm type="text"></InputTypeForm>
               </div>
             </div>
@@ -162,7 +166,7 @@ export default function LeaveForm() {
             </div>
           </div>
         </div>
-        <div className={`${styles.mb15}`}>
+        <div className={`${styles.mb30}`}>
           <div className={`${styles.lineWarper}`}>
             <div className={`${styles.lineWarper} ${styles.wp100}`}>
               <p className={`${styles.textFont} ${styles.wp30}`}>ในระหว่างลาจะติดต่อข้าพเจ้าได้ที่</p>
@@ -172,7 +176,39 @@ export default function LeaveForm() {
             </div>
           </div>
         </div>
+        <div>
+          <div className={`${styles.lineWarper} ${styles.alignBaseline} ${styles.lineWarperBetween}`}>
+            <div className={`${styles.lineWarper}`}>
+              <div className={`${styles.clipfile}`}>
+                <Image src={`/menuicon/clip.png`} alt="icon menu" width="6" height="18" />
+              </div>
+              <p className={`${styles.textFont}`}>เอกสารแนบ</p>
+            </div>
+            <div className={`${styles.lineWarper} ${styles.flexColumn} ${styles.lineWarperBetween}`}>
+              <p className={`${styles.textFont}`}>ขอแสดงความนับถือ</p>
+              <div className={`${styles.signature} ${styles.mb15} ${styles.mt15}`}>
+
+              </div>
+              <div className={`${styles.lineWarper}`}>
+                <p className={`${styles.textFont}`}>ลงชื่อ</p>
+                <div className={`${styles.inputWarper} ${styles.vw18}`}>
+                  <InputTypeForm type="text"></InputTypeForm>
+                </div>
+              </div>
+            </div>
+            <div onClick={()=>setShowAlert(true)} className={`${styles.lineWarper} ${styles.sendBTNWarper}`}>
+              <div className={`${styles.sendBTN}`}>Send</div>
+            </div>
+          </div>
+        </div>
       </div>
+      {showAlert ?
+        <AlertBox clickOut={(e)=>setShowAlert(!e)}>
+          <p>การเข้าใช้งานไม่ถูกต้อง ไม่สามารถบันทึกเวลาของท่านลงในระบบได้
+            โปรดตรวจสอบอินเตอร์เน็ตอีกครั้งว่าเป็นของโรงเรียนแล้ว</p>
+        </AlertBox>
+        : null}
+
     </section>
   )
 }
