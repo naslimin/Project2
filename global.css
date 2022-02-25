@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Actor&family=Alegreya+SC:wght@700&family=Alegreya+Sans&family=Aleo&family=Allerta&family=Noto+Sans+Thai&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Actor&family=Alef&family=Alegreya+SC:wght@700&family=Alegreya+Sans&family=Aleo&family=Allerta&family=Noto+Sans+Thai&display=swap');
 
 #__next {
   display: flex;
@@ -69,6 +69,43 @@ body {
   align-items: baseline;
   display: flex;
 }
+
 .rbc-today {
   background-color: transparent !important;
+}
+
+@media (min-width: 576px) {
+  :root {
+    --size-divisor: 4;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --size-divisor: 3;
+  }
+}
+
+@media (min-width: 900px) {
+  :root {
+    --size-divisor: 2.5;
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --size-divisor: 2;
+  }
+}
+
+@media (min-width: 1500px) {
+  :root {
+    --size-divisor: 1.2;
+  }
+}
+
+@media (min-width: 1800px) {
+  :root {
+    --size-divisor: 1;
+  }
 }
