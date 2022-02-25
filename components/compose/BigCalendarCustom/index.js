@@ -50,11 +50,12 @@ class MyCustomDateHeader extends React.Component {
   }
 
   render() {
-    if (this.item != -1)
-      return (
-        <div ref={this.div} style={{ width: this.state.www, height: this.state.hhh }} className={`${styles.fontDate} ${events[this.item].type == "checkin" ? styles.checkin : events[this.item].type == "checkrate" ? styles.checkrate : ''} ${styles.focusDate}`}>{this.props.label}</div>
-      )
-    else return (
+    // if (this.item != -1)
+    //   return (
+    //     <div ref={this.div} style={{ width: this.state.www, height: this.state.hhh }} className={`${styles.fontDate} ${events[this.item].type == "checkin" ? styles.checkin : events[this.item].type == "checkrate" ? styles.checkrate : ''} ${styles.focusDate}`}>{this.props.label}</div>
+    //   )
+    // else
+    return (
       <div ref={this.div} style={{ width: this.state.www, height: this.state.hhh }} className={styles.fontDate}>{this.props.label}</div>
     )
   }
@@ -65,9 +66,9 @@ const ListEvents = () => {
     return <div key={`ListEvents_${i}`} className={`${styles.eventWarper}`}>
       <div className={`${styles.eventWarperTitle}`}>
         <p className={`${styles.eventTitle}`}>{element.desc}</p>
-        <p className={`${styles.eventMonth}`}>{moment(element.start).format("MMM")} {NameDay[moment(element.start).format('ddd')]}</p>
+        <p className={`${styles.eventMonth}`}>{moment(element.start).format("LL")}</p>
       </div>
-      <div className={`${styles.eventDate}`}>{moment(element.start).format('dddd Do h:mm')}</div>
+      <div className={`${styles.eventDate}`}>{moment(element.start).format('HH:mm')}</div>
     </div>
   });
 }
@@ -94,8 +95,8 @@ export default function BigCalendarCustom() {
     <div className={styles.bgCalenDarOuter}>
       <div className={styles.bgCalenDar}>
         <div className={styles.warperCalendarHeader}>
-          <div className={`${styles.CalendarHeader1} ${styles.CalendarHeaderBox}`}>&#9776;</div>
-          <div className={`${styles.CalendarHeader2} ${styles.CalendarHeaderBox}`}>&#43;</div>
+          <div className={`${styles.CalendarHeader1} ${styles.CalendarHeaderBox}`}></div>
+          <div className={`${styles.CalendarHeader2} ${styles.CalendarHeaderBox}`}></div>
         </div>
 
         <Calendar

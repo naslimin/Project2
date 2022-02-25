@@ -6,13 +6,6 @@ export default [
         type: 'checkin'
     },
     {
-        desc: 'Long Event',
-        'start': new Date(2022, 1, 2, 7, 0),
-        'end': new Date(2022, 1, 2, 16, 30),
-        type: 'checkrate'
-    },
-
-    {
         desc: 'DTS STARTS',
         'start': new Date(2022, 2, 4, 8, 52),
         'end': new Date(2022, 2, 4, 16, 55),
@@ -85,5 +78,6 @@ export default [
         'start': new Date(2022, 1, 23, 10, 12),
         'end': new Date(2022, 1, 23, 11, 10),
         type: 'checkin'
-    }
+    },
+    
 ]
