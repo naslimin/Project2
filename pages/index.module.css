@@ -36,6 +36,10 @@
     margin-bottom: 20px;
 }
 
+.hidden {
+    display: none;
+}
+
 .imagePreview {
     font-family: Aleo;
     font-style: normal;
@@ -48,6 +52,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.imagePreviewRef {
+    width: auto;
+    height: 121px;
 }
 
 .boxBtnUpload {
