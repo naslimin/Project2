@@ -1,7 +1,7 @@
 // import Image from 'next/image'
 import MenuLink from './compose/menuLink'
 import styles from './sidebar.module.css'
-export default function Sidebar() {
+export default function Sidebar(props) {
 
   const menuItem = [
     {
@@ -35,7 +35,7 @@ export default function Sidebar() {
       name: 'Setting'
     },
     {
-      to: '/',
+      to: '/logout',
       icon: '/menuIcon/logout.png',
       name: 'Log out'
     }
@@ -53,7 +53,7 @@ export default function Sidebar() {
 
         {
           menuItem.map((item, i) => {
-            return <MenuLink key={i} to={item.to} icon={item.icon}>
+            return <MenuLink key={i} to={item.to} icon={item.icon} props={props}>
               {item.name}
             </MenuLink>
           })
