@@ -1,5 +1,5 @@
-import React from 'react';
-import events from './events';
+import React, { useEffect, useState } from 'react';
+// import events from './events';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Calendar, momentLocalizer } from 'react-big-calendar'
@@ -7,8 +7,8 @@ import styles from './index.module.css'
 moment.locale('en-GB');
 const localizer = momentLocalizer(moment);
 const NameDay = { "Sun": "S", "Mon": "M", "Tue": "T", "Wed": "W", "Thu": "T", "Fri": "F", "Sat": "S" }
+var events = []
 let MyCustomHeader = ({ label }) => {
-  
   return (
     <div className={styles.fontDay}>{NameDay[label]}</div>
   )
@@ -18,51 +18,49 @@ class MyCustomDateHeader extends React.Component {
     super(props);
     this.state = {
       www: null,
-      hhh: null
+      hhh: null,
+      item: -1
     }
     this.div = React.createRef();
-    this.item = events.findIndex(e => {
-      // if (this.props.date >= e.start && this.props.date <= e.end) {
-      //   return true
-      // }
-
-      if (this.props.date.getDate() >= e.start.getDate() && this.props.date.getDate() <= e.end.getDate()) {
-        return true
-      }
-    })
     this.setM = false
   }
+
   componentDidMount() {
     if (this.div.current.offsetHeight <= this.div.current.offsetWidth) {
       this.setState({
         www: this.div.current.offsetHeight
       })
-
-      this.forceUpdate()
     }
     if (this.div.current.offsetHeight >= this.div.current.offsetWidth) {
       this.setState({
         hhh: this.div.current.offsetWidth
       })
-
-      this.forceUpdate()
     }
+
+    this.setState({
+      item: this.props.events.findIndex(e => {
+        if (this.props.date.getDate() == e.start.getDate() && this.props.date.getMonth() == e.start.getMonth()) {
+          return true
+        }
+      })
+    })
   }
 
   render() {
-    // if (this.item != -1)
-    //   return (
-    //     <div ref={this.div} style={{ width: this.state.www, height: this.state.hhh }} className={`${styles.fontDate} ${events[this.item].type == "checkin" ? styles.checkin : events[this.item].type == "checkrate" ? styles.checkrate : ''} ${styles.focusDate}`}>{this.props.label}</div>
-    //   )
-    // else
     return (
-      <div ref={this.div} style={{ width: this.state.www, height: this.state.hhh }} className={styles.fontDate}>{this.props.label}</div>
+      <>
+        {this.state.item != -1 ?
+          <div ref={this.div} style={{ width: this.state.www, height: this.state.hhh }} className={`${styles.fontDate} ${events[this.state.item].type == "checkin" ? styles.checkin : events[this.state.item].type == "checkrate" ? styles.checkrate : ''} ${styles.focusDate}`}>{this.props.label}</div>
+          :
+          <div ref={this.div} style={{ width: this.state.www, height: this.state.hhh }} className={styles.fontDate}>{this.props.label}</div>
+        }
+      </>
     )
   }
 }
 
 const ListEvents = () => {
-  return events.map((element,i) => {
+  return events.map((element, i) => {
     return <div key={`ListEvents_${i}`} className={`${styles.eventWarper}`}>
       <div className={`${styles.eventWarperTitle}`}>
         <p className={`${styles.eventTitle}`}>{element.desc}</p>
@@ -90,7 +88,8 @@ class CustomToolbar extends React.Component {
   }
 }
 
-export default function BigCalendarCustom() {
+export default function BigCalendarCustom({ props }) {
+  events = props.EventData
   return (
     <div className={styles.bgCalenDarOuter}>
       <div className={styles.bgCalenDar}>
@@ -107,10 +106,11 @@ export default function BigCalendarCustom() {
           style={{ height: 500, width: '100%' }}
           defaultDate={moment().toDate()}
           components={{
-            month: { header: MyCustomHeader, dateHeader: MyCustomDateHeader },
+            month: { header: MyCustomHeader, dateHeader: (e) => <MyCustomDateHeader events={events} {...e} /> },
             toolbar: CustomToolbar
           }}
         />
+
         <div className={`${styles.eventBox}`}>
           <p className={`${styles.upcommingHeader}`}>Upcomming events this month</p>
 
