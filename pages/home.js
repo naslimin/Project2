@@ -1,12 +1,12 @@
 import Layout from '../components/layout'
+// import BigCalendarCustom from '../components/compose/BigCalendarCustom'
+// const BigCalendarCustom = dynamic(() => import('../components/compose/BigCalendarCustom'), { ssr: false })
 import dynamic from 'next/dynamic'
 const BigCalendarCustom = dynamic(() => import('../components/compose/BigCalendarCustom'), { ssr: false })
-export default function Home() {
+export default function Home(props) {
   return (
     <section>
-      <div>
-      <BigCalendarCustom/>
-      </div>
+      <BigCalendarCustom props={props} />
     </section>
   )
 }
