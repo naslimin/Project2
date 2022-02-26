@@ -4,9 +4,10 @@
     "dev": "next",
     "build": "next build && next export -o html/public",
     "start": "next start",
-    "deploy":"cd html && firebase deploy"
+    "deploy": "cd html && firebase deploy"
   },
   "dependencies": {
+    "firebase": "^8.10.0",
     "moment": "^2.29.1",
     "next": "latest",
     "react": "^17.0.2",
