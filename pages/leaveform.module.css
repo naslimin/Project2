@@ -33,6 +33,7 @@
     background: rgba(255, 255, 255, 0.5);
     mix-blend-mode: normal;
     border-radius: 3px;
+    text-align: center;
 }
 
 .mb30 {
@@ -76,7 +77,10 @@
     font-size: 16px;
     font-family: 'Aleo', 'Noto Sans Thai', sans-serif;
 }
-
+.imgSignature{
+    width: auto;
+    height: 60px;
+}
 p.textFont {
     padding: 0;
     margin: 0;

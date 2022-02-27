@@ -4,8 +4,22 @@ import AlertBox from '../components/compose/alertBox'
 import InputTypeForm from '../components/compose/inputTypeForm'
 import Layout from '../components/layout'
 import styles from './leaveform.module.css'
-export default function LeaveForm() {
+export default function LeaveForm(props) {
   const [ showAlert, setShowAlert ] = useState(false);
+  const [state, setState] = useState({
+    w_at:"โรงเรียนบ้านวังกะพ้อ เพียรอนุสรณ์",
+    date:new Date().getDate(),
+    mouth:new Date().getMonth()+1,
+    year:new Date().getFullYear()+543,
+    ...props.UserDataDetail
+  });
+  const handleChange = e => {
+    const { name, value } = e.target;
+    setState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
   return (
     <section>
       <h2>แบบฟร์อมการลางาน</h2>
@@ -15,7 +29,7 @@ export default function LeaveForm() {
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>(เขียนที่)</p>
               <div className={`${styles.inputWarper} ${styles.vw15}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm value={state.w_at} onChange={handleChange} name="w_at" type="text"></InputTypeForm>
               </div>
             </div>
           </div>
@@ -25,19 +39,19 @@ export default function LeaveForm() {
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>วันที่</p>
               <div className={`${styles.inputWarper} ${styles.vw4}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm value={state.date} onChange={handleChange} name="date" type="text"></InputTypeForm>
               </div>
             </div>
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>เดือน</p>
               <div className={`${styles.inputWarper} ${styles.vw6}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm value={state.mouth} onChange={handleChange} name="mouth" type="text"></InputTypeForm>
               </div>
             </div>
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>พ.ศ.</p>
               <div className={`${styles.inputWarper} ${styles.vw4}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm value={state.year} onChange={handleChange} name="year" type="text"></InputTypeForm>
               </div>
             </div>
           </div>
@@ -73,7 +87,7 @@ export default function LeaveForm() {
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>ตำแหน่ง</p>
               <div className={`${styles.inputWarper} ${styles.vw20}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm type="text" value={props.UserDataDetail.position}></InputTypeForm>
               </div>
             </div>
           </div>
@@ -187,7 +201,7 @@ export default function LeaveForm() {
             <div className={`${styles.lineWarper} ${styles.flexColumn} ${styles.lineWarperBetween}`}>
               <p className={`${styles.textFont}`}>ขอแสดงความนับถือ</p>
               <div className={`${styles.signature} ${styles.mb15} ${styles.mt15}`}>
-
+                <img className={styles.imgSignature} src={props.UserDataDetail.Signature}/>
               </div>
               <div className={`${styles.lineWarper}`}>
                 <p className={`${styles.textFont}`}>ลงชื่อ</p>
