@@ -3,7 +3,7 @@ import AvatarUser from '../components/compose/AvatarUser'
 import Layout from '../components/layout'
 import styles from './userinfo.module.css'
 
-export default function UserInfo() {
+export default function UserInfo(props) {
   return (
     <section>
       <h2>ข้อมูลส่วนตัว</h2>
@@ -21,7 +21,7 @@ export default function UserInfo() {
         <div className={`${styles.warperboxitem} ${styles.mb}`}>
           <div className={`${styles.warperboxbody}`}>
             <p className={`${styles.title}`}>ชื่อ-สกุล : นาง ภาตีเมาะ ดือรามะ</p>
-            <p className={`${styles.title}`}>ตำหน่ง : ผู้อำนวยการโรงเรียน</p>
+            <p className={`${styles.title}`}>ตำหน่ง : {props.UserDataDetail.position}</p>
             <p className={`${styles.title}`}>ประเภท : ข้าราชการครู</p>
             <p className={`${styles.title}`}>วิทยฐานะ : ชำนาญการพิเศษ</p>
             <p className={`${styles.title}`}>สังกัด : สพป.ปัตตานี เขต 3</p>
