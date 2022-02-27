@@ -4,7 +4,7 @@ import events from '../components/compose/BigCalendarCustom/events'
 
 const ListEvents = ({props}) => {
   return props.EventData.map((element,i) => {
-    return <EventBox key={`ListEvents_${i}`} element={element}></EventBox>
+    return <EventBox key={`ListEvents_${i}`} props={props} element={element}></EventBox>
   });
 }
 
