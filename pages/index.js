@@ -20,7 +20,7 @@ export default function Index(props) {
         router.push('/home')
       }
     });
-  },[props.UserData])
+  }, [props.UserData])
   const loginCheck = async () => {
     if (resetPass) {
       sendResetPass()
@@ -40,29 +40,57 @@ export default function Index(props) {
               .then((userCredential) => {
                 var weekdays = moment().day()
                 var user = userCredential.user;
-                console.log(user.email,weekdays)
-                fire.firestore().collection(`${user.email}/history/${moment().format('YYYY-MM')}`).doc(`${moment().format('DD')}`).set(
-                  {
-                    desc: 'Check In',
-                    start: moment().toDate(),
-                    end: null,
-                    type: 'checkin'
-                  }
-                )
-                  .then(() => {
-                    props.setShowAlert(false);
-                    setTimeout(() => {
-                      router.push('/home')
-                    }, 1500)
+                console.log(user.email, weekdays)
+                if (weekdays == 0 || weekdays == 6) {
+                  props.setAlertInner(<>
+                    <p>ขณะนี้อยู่นอกเหนือเวลาบันทึกเวลาเข้า (07:00-08:30)<br />
+                      และเวลาออก (15:45-18:00)<br />
+                      โปรดลองอีกครั้งภายหลัง</p>
+                  </>)
+                  props.setShowAlert(true);
+                } else {
+                  fire.firestore().collection(`${user.email}/history/${moment().format('YYYY-MM')}`).doc(`${moment().format('DD')}`).get().then(doc => {
+                    if (!doc.exists) {
+                      var checkInData = {}
+                      if (moment().toDate().getHours() >= 7 && moment().toDate().getHours() <= 9) {
+                        checkInData = {
+                          desc: 'Check In',
+                          start: moment().toDate(),
+                          end: null,
+                          type: 'checkin'
+                        }
+                      } else {
+                        checkInData = {
+                          desc: 'Check Rate',
+                          start: moment().toDate(),
+                          end: null,
+                          type: 'checkrate'
+                        }
+                      }
+                      fire.firestore().collection(`${user.email}/history/${moment().format('YYYY-MM')}`)
+                        .doc(`${moment().format('DD')}`)
+                        .set(checkInData)
+                        .then(() => {
+                          props.setShowAlert(false);
+                          setTimeout(() => {
+                            router.push('/home')
+                          }, 1500)
+                        })
+                        .catch((error) => {
+                          console.log(error)
+                          props.setAlertInner(<>
+                            <p>{error.message}</p>
+                          </>)
+                          props.setShowAlert(true);
+                        });
+                    } else {
+                      props.setShowAlert(false);
+                      setTimeout(() => {
+                        router.push('/home')
+                      }, 1500)
+                    }
                   })
-                  .catch((error) => {
-                    console.log(error)
-                    props.setAlertInner(<>
-                      <p>{error.message}</p>
-                    </>)
-                    props.setShowAlert(true);
-                  });
-
+                }
               })
               .catch((error) => {
                 props.setAlertInner(<>
@@ -112,10 +140,15 @@ export default function Index(props) {
     <>
       <UserBlank className={styles.spacer} />
       <InputType className={styles.spacer} value={state.Email} onChange={handleChange} type="email" name="Email" placeholder="Username (Email)" />
-      <InputType className={styles.spacer} value={state.Password} onChange={handleChange} type="password" name="Password" placeholder="Password" />
+      {resetPass ?
+        null
+        :
+        <InputType className={styles.spacer} value={state.Password} onChange={handleChange} type="password" name="Password" placeholder="Password" />
+      }
+
       <div className={styles.redioWarper}>
-        <RadioType name="loginType" checked={true} value="remember_me" onChange={e => setResetPass(false)}>Remember me</RadioType>
-        <RadioType name="loginType" value='forgot_password' onChange={e => setResetPass(true)}>Forgot password</RadioType>
+        <RadioType name="loginType" checked={!resetPass} value="remember_me" onChange={e => setResetPass(false)}>Remember me</RadioType>
+        <RadioType name="loginType" checked={resetPass} value='forgot_password' onChange={e => setResetPass(true)}>Forgot password</RadioType>
       </div>
       {/* <Link href={'home'}> */}
       <div onClick={() => loginCheck()} className={`${styles.loginBTN} fontText`}>Login</div>
