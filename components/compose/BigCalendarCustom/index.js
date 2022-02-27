@@ -4,6 +4,7 @@ import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import styles from './index.module.css'
+import fire from '../../../config/firebase';
 moment.locale('en-GB');
 const localizer = momentLocalizer(moment);
 const NameDay = { "Sun": "S", "Mon": "M", "Tue": "T", "Wed": "W", "Thu": "T", "Fri": "F", "Sat": "S" }
@@ -58,15 +59,39 @@ class MyCustomDateHeader extends React.Component {
     )
   }
 }
-
-const ListEvents = () => {
+const stampLogoutTime = (props) => {
+  fire.firestore().collection(`${props.UserData.email}/history/${moment().format('YYYY-MM')}`).doc(`${moment().format('DD')}`).update(
+    {
+      end: moment().toDate()
+    }
+  )
+    .then(() => {
+      props.setShowAlert(false);
+      props.getEvent()
+    })
+    .catch((error) => {
+      props.setAlertInner(<>
+        <p>{error.message}</p>
+      </>)
+      props.setShowAlert(true);
+    });
+}
+const ListEvents = ({ props }) => {
   return events.map((element, i) => {
     return <div key={`ListEvents_${i}`} className={`${styles.eventWarper}`}>
       <div className={`${styles.eventWarperTitle}`}>
         <p className={`${styles.eventTitle}`}>{element.desc}</p>
         <p className={`${styles.eventMonth}`}>{moment(element.start).format("LL")}</p>
       </div>
-      <div className={`${styles.eventDate}`}>{moment(element.start).format('HH:mm')}</div>
+      <div className={`${styles.eventWarperTitle}`}>
+        <p className={`${styles.eventDate}`}>{moment(element.start).format('HH:mm')}</p>
+        {
+          !element.end
+            ?
+            <p onClick={() => stampLogoutTime(props)} className={`${styles.eventMonth} ${styles.eventStampLogout}`}>บันทึกเวลาออก</p>
+            : null
+        }
+      </div>
     </div>
   });
 }
@@ -114,7 +139,7 @@ export default function BigCalendarCustom({ props }) {
         <div className={`${styles.eventBox}`}>
           <p className={`${styles.upcommingHeader}`}>Upcomming events this month</p>
 
-          <ListEvents />
+          <ListEvents props={props} />
         </div>
       </div>
     </div>

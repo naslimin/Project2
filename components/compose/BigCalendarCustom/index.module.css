@@ -163,8 +163,12 @@
     margin: 0;
     padding: 0;
 }
-
+.eventStampLogout{
+    color: red;
+    cursor: pointer;
+}
 .eventDate {
+    text-align: center;
     background-color: #f8fafa !important;
     border: 2px solid #fff !important;
     border-radius: 50px !important;
@@ -179,4 +183,6 @@
     padding-inline: 8px;
     padding-top: 2px;
     padding-bottom: 2px;
+    margin: 0;
+    margin-bottom: 5px;
 }
