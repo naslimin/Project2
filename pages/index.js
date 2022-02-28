@@ -61,7 +61,7 @@ export default function Index(props) {
                         }
                       } else {
                         checkInData = {
-                          desc: 'Check Rate',
+                          desc: 'Check Late',
                           start: moment().toDate(),
                           end: null,
                           type: 'checkrate'
