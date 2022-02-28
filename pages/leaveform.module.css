@@ -46,7 +46,7 @@
 }
 
 .lineWarperRight {
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .alignBaseline {
