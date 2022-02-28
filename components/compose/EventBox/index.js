@@ -18,7 +18,7 @@ export default function EventBox({ element, props }) {
       <div className={`${styles.warperBox}`}>
         <div className={`${styles.warperBoxBody}`}>
           <p className={`${styles.text} ${styles.textMain}`}>วันที่/เดือน/ปี</p>
-          <p className={`${styles.text} ${styles.textSub} ${styles.textIndexDate}`}>{moment(element.start).format('L')}</p>
+          <p className={`${styles.text} ${styles.textSub} ${styles.textIndexDate}`}>{moment(element.start).format('DD/MM/YYYY')}</p>
           <p className={`${styles.text} ${styles.textMain}`}>เวลา</p>
           <p className={`${styles.text} ${styles.textIndexTime}`}>
             <span className={`${styles.textSub} ${styles.textP}`}>เข้า</span>
