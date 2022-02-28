@@ -136,7 +136,7 @@ export default function LeaveForm(props) {
             </div>
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>มีกำหนด</p>
-              <div className={`${styles.inputWarper} ${styles.vw15}`}>
+              <div className={`${styles.inputWarper} ${styles.vw4}`}>
                 <InputTypeForm type="text"></InputTypeForm>
               </div>
               <p className={`${styles.textFont}`}>วัน</p>
@@ -194,7 +194,7 @@ export default function LeaveForm(props) {
           <div className={`${styles.lineWarper} ${styles.alignBaseline} ${styles.lineWarperBetween}`}>
             <div className={`${styles.lineWarper}`}>
               <div className={`${styles.clipfile}`}>
-                <img src={`/menuicon/clip.png`} alt="icon menu" width="6" height="18" />
+                <img src={`/menuIcon/clip.png`} alt="icon menu" width="6" height="18" />
               </div>
               <p className={`${styles.textFont}`}>เอกสารแนบ</p>
             </div>

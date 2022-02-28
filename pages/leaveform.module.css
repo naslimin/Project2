@@ -1,5 +1,5 @@
 .form {
-    width: 90%;
+    width: 100%;
     margin: auto;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .textFont {
-    font-size: 16px;
+    font-size: 12px;
     font-family: 'Aleo', 'Noto Sans Thai', sans-serif;
 }
 .imgSignature{
@@ -98,63 +98,63 @@ p.textFont {
 }
 
 .vw4 {
-    width: calc(4rem / var(--size-divisor));
+    width: calc(3rem);
 }
 
 .vw5 {
-    width: calc(5rem / var(--size-divisor));
+    width: calc(5rem);
 }
 
 .vw6 {
-    width: calc(6rem / var(--size-divisor));
+    width: calc(2rem);
 }
 
 .vw7 {
-    width: calc(7rem / var(--size-divisor));
+    width: calc(7rem);
 }
 
 .vw8 {
-    width: calc(8rem / var(--size-divisor));
+    width: calc(8rem);
 }
 
 .vw9 {
-    width: calc(9rem / var(--size-divisor));
+    width: calc(9rem);
 }
 
 .vw10 {
-    width: calc(10rem / var(--size-divisor));
+    width: calc(10rem);
 }
 
 .vw15 {
-    width: calc(15rem / var(--size-divisor));
+    width: 9rem;
 }
 
 .vw18 {
-    width: calc(18rem / var(--size-divisor));
+    width: calc(7rem);
 }
 
 .vw19 {
-    width: calc(19rem / var(--size-divisor));
+    width: calc(19rem);
 }
 
 .vw20 {
-    width: calc(20rem / var(--size-divisor));
+    width: calc(10rem);
 }
 
 .vw25 {
-    width: calc(25rem / var(--size-divisor));
+    width: calc(11rem);
 }
 
 .vw35 {
-    width: calc(35rem / var(--size-divisor));
+    width: calc(35rem);
 }
 
 .vw36 {
-    width: calc(36rem / var(--size-divisor));
+    width: calc(36rem);
 }
 
 .wp30 {
-    width: 30%;
+    width: 70%;
 }
 
 .wp100 {
