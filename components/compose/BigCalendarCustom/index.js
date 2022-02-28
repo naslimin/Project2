@@ -88,7 +88,7 @@ const ListEvents = ({ props }) => {
         {
           !element.end
             ?
-            <p onClick={() => stampLogoutTime(props)} className={`${styles.eventMonth} ${styles.eventStampLogout}`}>บันทึกเวลาออก</p>
+            <p onClick={() => stampLogoutTime(props)} className={`${styles.eventMonth} ${styles.eventStampLogout}`}>คลิกบันทึกเวลาออก</p>
             : null
         }
       </div>
