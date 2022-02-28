@@ -5,7 +5,10 @@
 }
 
 .main>section {
-  padding: 32px;
+  padding-top: 32px;
+  padding-right: 0px;
+  padding-bottom: 32px;
+  padding-left: 32px;
   width: 100%;
   overflow-y: scroll;
 }
