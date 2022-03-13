@@ -1,18 +1,65 @@
 // import Image from 'next/image'
-import { useState } from 'react'
-import AlertBox from '../components/compose/alertBox'
+import { useEffect, useState } from 'react'
 import InputTypeForm from '../components/compose/inputTypeForm'
 import Layout from '../components/layout'
+import fire from '../config/firebase'
 import styles from './leaveform.module.css'
+import moment from 'moment';
+import { useRouter } from 'next/router'
 export default function LeaveForm(props) {
-  const [ showAlert, setShowAlert ] = useState(false);
   const [state, setState] = useState({
-    w_at:"โรงเรียนบ้านวังกะพ้อ เพียรอนุสรณ์",
-    date:new Date().getDate(),
-    mouth:new Date().getMonth()+1,
-    year:new Date().getFullYear()+543,
-    ...props.UserDataDetail
+    w_at: props.UserDataDetail.school,
+    i_am: `${props.UserDataDetail.Name} ${props.UserDataDetail.Subname}`,
+    contact_at: props.UserDataDetail.Email,
+    date: new Date().getDate(),
+    mouth: new Date().getMonth() + 1,
+    year: new Date().getFullYear() + 543,
+    position: props.UserDataDetail.position,
+    department: props.UserDataDetail.department,
+    UserDataDetail: props.UserDataDetail,
   });
+  const router = useRouter()
+  useEffect(() => {
+    setState({
+      w_at: props.UserDataDetail.school,
+      i_am: `${props.UserDataDetail.Name} ${props.UserDataDetail.Subname}`,
+      contact_at: props.UserDataDetail.Email,
+      date: new Date().getDate(),
+      mouth: new Date().getMonth() + 1,
+      year: new Date().getFullYear() + 543,
+      position: props.UserDataDetail.position,
+      department: props.UserDataDetail.department,
+      UserDataDetail: props.UserDataDetail,
+    })
+  }, [props.UserDataDetail])
+
+  useEffect(() => {
+    var start = moment(state.start_date)
+    if (state.end_date) {
+      var end = moment(state.end_date)
+      var totalDays = moment.duration(end.diff(start)).asDays()
+
+      setState(prevState => ({
+        ...prevState,
+        total_days: totalDays >= 0 ? totalDays + 1 : 0
+      }));
+    }
+  }, [state.start_date, state.end_date])
+
+  useEffect(() => {
+    var start = moment(state.last_leave_start_date)
+    if (state.last_leave_end_date) {
+      var end = moment(state.last_leave_end_date)
+      var totalDays = moment.duration(end.diff(start)).asDays()
+
+      setState(prevState => ({
+        ...prevState,
+        last_leave_total_days: totalDays >= 0 ? totalDays + 1 : 0
+      }));
+    }
+  }, [state.last_leave_start_date, state.last_leave_end_date])
+
+
   const handleChange = e => {
     const { name, value } = e.target;
     setState(prevState => ({
@@ -20,6 +67,94 @@ export default function LeaveForm(props) {
       [name]: value
     }));
   };
+
+  const sendForm = async () => {
+
+    props.setAlertInner(<><img width={60} height={60} src='/icon/loading-buffering.gif' /></>)
+    props.setShowAlert(true)
+
+    var start = moment(state.start_date)
+    var end = moment(state.end_date)
+    var totalDays = moment.duration(end.diff(start)).asDays()
+
+    for (let index = 0; index <= totalDays; index++) {
+      var date = moment(state.start_date).add(index, 'd')
+      fire.firestore().collection(`${props.UserData.email}/history/${moment(date).format('YYYY-MM')}`)
+        .doc(`${moment(date).format('DD')}`).set({
+          desc: 'Leave Work',
+          start: moment(date).toDate(),
+          end: moment(date).toDate(),
+          type: 'leavework'
+        })
+        .then(() => {
+          console.log("Document successfully written!");
+        })
+    }
+    await fire.firestore().collection(`${props.UserData.email}/leavehistory/${moment(state.start_date).format('YYYY')}`)
+      .doc(`${moment(state.start_date).format('MM')}`).get().then(async (doc) => {
+        if (doc.exists) {
+          await fire.firestore().collection(`${props.UserData.email}/leavehistory/${moment(state.start_date).format('YYYY')}`)
+            .doc(`${moment(state.start_date).format('MM')}`)
+            .update({
+              [state.leavework]: fire.firestore.FieldValue.increment(state.total_days)
+            })
+            .then(() => {
+              console.log("Document successfully written!");
+            })
+        } else {
+          await fire.firestore().collection(`${props.UserData.email}/leavehistory/${moment(state.start_date).format('YYYY')}`)
+            .doc(`${moment(state.start_date).format('MM')}`)
+            .set({
+              [state.leavework]: fire.firestore.FieldValue.increment(state.total_days)
+            })
+            .then(() => {
+              console.log("Document successfully written!");
+            })
+        }
+      }).catch((error) => {
+        console.log("Error getting document:", error);
+      });
+    var docRef = await fire.firestore().collection(`${props.UserData.email}/leave/data`).add({
+      ...state
+    })
+
+    // await fire.firestore().collection(`${props.UserData.email}/dashboard/${moment(state.start_date).format('YYYY')}`)
+    //   .doc(`${state.leavework}`).get().then(async (doc) => {
+    var month = moment(state.start_date).format('MM')
+    //     if (doc.exists) {
+    await fire.firestore().collection(`${props.UserData.email}/dashboard/${moment(state.start_date).format('YYYY')}`)
+      .add({
+        type: state.leavework,
+        month: month,
+        total_days: state.total_days,
+        refid: docRef.id
+      })
+      .then(() => {
+        console.log("Document successfully update written!");
+      })
+    //   } else {
+    //     await fire.firestore().collection(`${props.UserData.email}/dashboard/${moment(state.start_date).format('YYYY')}`)
+    //       .doc(`${state.leavework}`)
+    //       .set({
+    //         [month]: {
+    //           hit: fire.firestore.FieldValue.increment(1),
+    //           total_days: fire.firestore.FieldValue.increment(state.total_days)
+    //         }
+    //       })
+    //       .then(() => {
+    //         console.log("Document successfully set written!");
+    //       })
+    //   }
+    // }).catch((error) => {
+    //   console.log("Error getting document:", error);
+    // });
+
+
+
+    router.push(`/pdf?id=${docRef.id}`)
+    props.setShowAlert(false);
+
+  }
   return (
     <section>
       <h2>แบบฟร์อมการลางาน</h2>
@@ -61,7 +196,7 @@ export default function LeaveForm(props) {
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>เรื่อง</p>
               <div className={`${styles.inputWarper} ${styles.vw15}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm value={state.subject} onChange={handleChange} name="subject" type="text"></InputTypeForm>
               </div>
             </div>
           </div>
@@ -71,7 +206,7 @@ export default function LeaveForm(props) {
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>เรียน</p>
               <div className={`${styles.inputWarper} ${styles.vw15}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm value={state.notice} onChange={handleChange} name="notice" type="text"></InputTypeForm>
               </div>
             </div>
           </div>
@@ -81,13 +216,13 @@ export default function LeaveForm(props) {
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>ข้าพเจ้า</p>
               <div className={`${styles.inputWarper} ${styles.vw25}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm value={state.i_am} onChange={handleChange} name="i_am" type="text"></InputTypeForm>
               </div>
             </div>
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>ตำแหน่ง</p>
               <div className={`${styles.inputWarper} ${styles.vw20}`}>
-                <InputTypeForm type="text" value={props.UserDataDetail.position}></InputTypeForm>
+                <InputTypeForm value={state.position} onChange={handleChange} name="position" type="text"></InputTypeForm>
               </div>
             </div>
           </div>
@@ -97,7 +232,7 @@ export default function LeaveForm(props) {
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>สังกัด</p>
               <div className={`${styles.inputWarper} ${styles.vw15}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm value={state.department} onChange={handleChange} name="department" type="text"></InputTypeForm>
               </div>
             </div>
           </div>
@@ -107,15 +242,21 @@ export default function LeaveForm(props) {
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>ขอลา</p>
               <div className={`${styles.radioWarper} ${styles.vw10}`}>
-                <div className={`${styles.lineWarper} ${styles.textFont}`}><InputTypeForm className={`${styles.radioBox}`} name="leavework" type="radio"></InputTypeForm> <span>ลาป่วย</span></div>
-                <div className={`${styles.lineWarper} ${styles.textFont}`}><InputTypeForm className={`${styles.radioBox}`} name="leavework" type="radio"></InputTypeForm> <span>ลากิจส่วนตัว</span></div>
-                <div className={`${styles.lineWarper} ${styles.textFont}`}><InputTypeForm className={`${styles.radioBox}`} name="leavework" type="radio"></InputTypeForm> <span>ลาคลอดบุตร</span></div>
+                <div className={`${styles.lineWarper} ${styles.textFont}`}>
+                  <InputTypeForm onChange={handleChange} className={`${styles.radioBox}`} name="leavework" type="radio" value={`ลาป่วย`}></InputTypeForm> <span>ลาป่วย</span>
+                </div>
+                <div className={`${styles.lineWarper} ${styles.textFont}`}>
+                  <InputTypeForm onChange={handleChange} className={`${styles.radioBox}`} name="leavework" type="radio" value={`ลากิจส่วนตัว`}></InputTypeForm> <span>ลากิจส่วนตัว</span>
+                </div>
+                <div className={`${styles.lineWarper} ${styles.textFont}`}>
+                  <InputTypeForm onChange={handleChange} className={`${styles.radioBox}`} name="leavework" type="radio" value={`ลาคลอดบุตร`}></InputTypeForm> <span>ลาคลอดบุตร</span>
+                </div>
               </div>
             </div>
             <div className={`${styles.lineWarper} ${styles.wp100}`}>
               <p className={`${styles.textFont}`}>เนื่องจาก</p>
               <div className={`${styles.inputWarper} ${styles.wp100}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm value={state.due_to} onChange={handleChange} name="due_to" type="text"></InputTypeForm>
               </div>
             </div>
           </div>
@@ -125,19 +266,19 @@ export default function LeaveForm(props) {
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>ตั้งแต่วันที่</p>
               <div className={`${styles.inputWarper} ${styles.vw18}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm value={state.start_date} onChange={handleChange} name="start_date" type="date"></InputTypeForm>
               </div>
             </div>
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>ถึงวันที่</p>
               <div className={`${styles.inputWarper} ${styles.vw18}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm value={state.end_date} onChange={handleChange} name="end_date" type="date"></InputTypeForm>
               </div>
             </div>
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>มีกำหนด</p>
               <div className={`${styles.inputWarper} ${styles.vw4}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm value={state.total_days} onChange={handleChange} name="total_days" type="number"></InputTypeForm>
               </div>
               <p className={`${styles.textFont}`}>วัน</p>
             </div>
@@ -150,15 +291,21 @@ export default function LeaveForm(props) {
                 <p className={`${styles.textFont}`}>ข้าพเจ้าได้</p>
               </div>
               <div className={`${styles.inputWarper} ${styles.lineWarper}`}>
-                <div className={`${styles.lineWarper} ${styles.textFont}`}><InputTypeForm className={`${styles.radioBoxInline}`} name="leavework" type="radio"></InputTypeForm> <span>ลาป่วย</span></div>
-                <div className={`${styles.lineWarper} ${styles.textFont}`}><InputTypeForm className={`${styles.radioBoxInline}`} name="leavework" type="radio"></InputTypeForm> <span>ลากิจส่วนตัว</span></div>
-                <div className={`${styles.lineWarper} ${styles.textFont}`}><InputTypeForm className={`${styles.radioBoxInline}`} name="leavework" type="radio"></InputTypeForm> <span>ลาคลอดบุตร</span></div>
+                <div className={`${styles.lineWarper} ${styles.textFont}`}>
+                  <InputTypeForm onChange={handleChange} className={`${styles.radioBoxInline}`} name="last_leavework" type="radio" value={`ลาป่วย`}></InputTypeForm> <span>ลาป่วย</span>
+                </div>
+                <div className={`${styles.lineWarper} ${styles.textFont}`}>
+                  <InputTypeForm onChange={handleChange} className={`${styles.radioBoxInline}`} name="last_leavework" type="radio" value={`ลากิจส่วนตัว`}></InputTypeForm> <span>ลากิจส่วนตัว</span>
+                </div>
+                <div className={`${styles.lineWarper} ${styles.textFont}`}>
+                  <InputTypeForm onChange={handleChange} className={`${styles.radioBoxInline}`} name="last_leavework" type="radio" value={`ลาคลอดบุตร`}></InputTypeForm> <span>ลาคลอดบุตร</span>
+                </div>
               </div>
             </div>
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>ครั้งสุดท้ายตั้งแต่วันที่</p>
               <div className={`${styles.inputWarper} ${styles.vw20}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm value={state.last_leave_start_date} onChange={handleChange} name="last_leave_start_date" type="date"></InputTypeForm>
               </div>
             </div>
           </div>
@@ -168,13 +315,13 @@ export default function LeaveForm(props) {
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>ถึงวันที่</p>
               <div className={`${styles.inputWarper} ${styles.vw18}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm value={state.last_leave_end_date} onChange={handleChange} name="last_leave_end_date" type="date"></InputTypeForm>
               </div>
             </div>
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>มีกำหนด</p>
               <div className={`${styles.inputWarper} ${styles.vw15}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm value={state.last_leave_total_days} onChange={handleChange} name="last_leave_total_days" type="number"></InputTypeForm>
               </div>
               <p className={`${styles.textFont}`}>วัน</p>
             </div>
@@ -185,7 +332,7 @@ export default function LeaveForm(props) {
             <div className={`${styles.lineWarper} ${styles.wp100}`}>
               <p className={`${styles.textFont} ${styles.wp30}`}>ในระหว่างลาจะติดต่อข้าพเจ้าได้ที่</p>
               <div className={`${styles.inputWarper} ${styles.wp100}`}>
-                <InputTypeForm type="text"></InputTypeForm>
+                <InputTypeForm value={state.contact_at} onChange={handleChange} name="contact_at" type="text"></InputTypeForm>
               </div>
             </div>
           </div>
@@ -193,35 +340,29 @@ export default function LeaveForm(props) {
         <div>
           <div className={`${styles.lineWarper} ${styles.alignBaseline} ${styles.lineWarperBetween}`}>
             <div className={`${styles.lineWarper}`}>
-              <div className={`${styles.clipfile}`}>
+              {/* <div className={`${styles.clipfile}`}>
                 <img src={`/menuIcon/clip.png`} alt="icon menu" width="6" height="18" />
               </div>
-              <p className={`${styles.textFont}`}>เอกสารแนบ</p>
+              <p className={`${styles.textFont}`}>เอกสารแนบ</p> */}
             </div>
             <div className={`${styles.lineWarper} ${styles.flexColumn} ${styles.lineWarperBetween}`}>
               <p className={`${styles.textFont}`}>ขอแสดงความนับถือ</p>
               <div className={`${styles.signature} ${styles.mb15} ${styles.mt15}`}>
-                <img className={styles.imgSignature} src={props.UserDataDetail.Signature}/>
+                <img className={styles.imgSignature} src={props.UserDataDetail.Signature} />
               </div>
               <div className={`${styles.lineWarper}`}>
                 <p className={`${styles.textFont}`}>ลงชื่อ</p>
                 <div className={`${styles.inputWarper} ${styles.vw18}`}>
-                  <InputTypeForm type="text"></InputTypeForm>
+                  <InputTypeForm value={state.i_am_signature} onChange={handleChange} name="i_am_signature" type="text"></InputTypeForm>
                 </div>
               </div>
             </div>
-            <div onClick={()=>setShowAlert(true)} className={`${styles.lineWarper} ${styles.sendBTNWarper}`}>
+            <div onClick={() => sendForm()} className={`${styles.lineWarper} ${styles.sendBTNWarper}`}>
               <div className={`${styles.sendBTN}`}>Send</div>
             </div>
           </div>
         </div>
       </div>
-      {showAlert ?
-        <AlertBox clickOut={(e)=>setShowAlert(!e)}>
-          <p>การเข้าใช้งานไม่ถูกต้อง ไม่สามารถบันทึกเวลาของท่านลงในระบบได้
-            โปรดตรวจสอบอินเตอร์เน็ตอีกครั้งว่าเป็นของโรงเรียนแล้ว</p>
-        </AlertBox>
-        : null}
 
     </section>
   )

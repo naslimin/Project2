@@ -9,7 +9,7 @@ export default function UserInfo(props) {
       <h2>ข้อมูลส่วนตัว</h2>
       <div className={`${styles.form}`}>
         <div className={`${styles.mb}`}>
-          <AvatarUser big={true} />
+          <AvatarUser big={true} src={props.UserDataDetail.Image}/>
         </div>
 
         <div className={`${styles.warperbox}`}>
@@ -20,12 +20,12 @@ export default function UserInfo(props) {
         </div>
         <div className={`${styles.warperboxitem} ${styles.mb}`}>
           <div className={`${styles.warperboxbody}`}>
-            <p className={`${styles.title}`}>ชื่อ-สกุล : นาง ภาตีเมาะ ดือรามะ</p>
-            <p className={`${styles.title}`}>ตำหน่ง : {props.UserDataDetail.position}</p>
-            <p className={`${styles.title}`}>ประเภท : ข้าราชการครู</p>
-            <p className={`${styles.title}`}>วิทยฐานะ : ชำนาญการพิเศษ</p>
-            <p className={`${styles.title}`}>สังกัด : สพป.ปัตตานี เขต 3</p>
-            <p className={`${styles.title}`}>โรงเรียน : บ้านวังกะพ้อ(เพียรอนุสรณ์)</p>
+            <p className={`${styles.title}`}>ชื่อ-สกุล : {props.UserDataDetail.Name} {props.UserDataDetail.Subname}</p>
+            <p className={`${styles.title}`}>ตำหน่ง : {props.UserDataDetail.position || '-'}</p>
+            <p className={`${styles.title}`}>ประเภท : {props.UserDataDetail.userType || '-'}</p>
+            <p className={`${styles.title}`}>วิทยฐานะ : {props.UserDataDetail.userLevel || '-'}</p>
+            <p className={`${styles.title}`}>สังกัด : {props.UserDataDetail.department || '-'}</p>
+            <p className={`${styles.title}`}>โรงเรียน : {props.UserDataDetail.school || '-'}</p>
           </div>
         </div>
 
@@ -37,8 +37,8 @@ export default function UserInfo(props) {
         </div>
         <div className={`${styles.warperboxitem} ${styles.mb}`}>
           <div className={`${styles.warperboxbody}`}>
-            <p className={`${styles.title}`}>ระดับชั่นที่สอน : ไม่ได้กำหนดการสอน</p>
-            <p className={`${styles.title}`}>กลุ่มสาระฯ : -</p>
+            <p className={`${styles.title}`}>ระดับชั่นที่สอน : {props.UserDataDetail.Grade || '-'}</p>
+            <p className={`${styles.title}`}>กลุ่มสาระฯ : {props.UserDataDetail.Group || '-'}</p>
           </div>
         </div>
       </div>

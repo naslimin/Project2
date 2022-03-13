@@ -1,9 +1,14 @@
 import Layout from '../components/layout'
-// import BigCalendarCustom from '../components/compose/BigCalendarCustom'
-// const BigCalendarCustom = dynamic(() => import('../components/compose/BigCalendarCustom'), { ssr: false })
-import dynamic from 'next/dynamic'
-const BigCalendarCustom = dynamic(() => import('../components/compose/BigCalendarCustom'), { ssr: false })
+import BigCalendarCustom from '../components/compose/BigCalendarCustom'
+import moment from 'moment';
+
+import { useEffect } from 'react';
 export default function Home(props) {
+  useEffect(() => {
+    if (moment().startOf('month').format('YYYY-MM') != props.EventDataM) {
+      props.setEventDataM(moment().startOf('month').format('YYYY-MM'))
+    }
+  }, [])
   return (
     <section>
       <BigCalendarCustom props={props} />

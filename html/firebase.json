@@ -44,6 +44,10 @@
         "destination": "/userinfo.html"
       },
       {
+        "source": "/pdf",
+        "destination": "/pdf.html"
+      },
+      {
         "source": "**",
         "destination": "/404.html"
       }

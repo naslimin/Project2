@@ -34,63 +34,14 @@ export default function Index(props) {
       } else {
         props.setAlertInner(<><img width={60} height={60} src='/icon/loading-buffering.gif' /></>)
         props.setShowAlert(true);
-        fire.auth().setPersistence(fire.auth.Auth.Persistence.SESSION)
+        fire.auth().setPersistence(fire.auth.Auth.Persistence.LOCAL)
           .then(() => {
             fire.auth().signInWithEmailAndPassword(state.Email, state.Password)
               .then((userCredential) => {
-                var weekdays = moment().day()
-                var user = userCredential.user;
-                console.log(user.email, weekdays)
-                if (weekdays == 0 || weekdays == 6) {
-                  props.setAlertInner(<>
-                    <p>ขณะนี้อยู่นอกเหนือเวลาบันทึกเวลาเข้า (07:00-08:30)<br />
-                      และเวลาออก (15:45-18:00)<br />
-                      โปรดลองอีกครั้งภายหลัง</p>
-                  </>)
-                  props.setShowAlert(true);
-                } else {
-                  fire.firestore().collection(`${user.email}/history/${moment().format('YYYY-MM')}`).doc(`${moment().format('DD')}`).get().then(doc => {
-                    if (!doc.exists) {
-                      var checkInData = {}
-                      if (moment().toDate().getHours() >= 7 && moment().toDate().getHours() <= 9) {
-                        checkInData = {
-                          desc: 'Check In',
-                          start: moment().toDate(),
-                          end: null,
-                          type: 'checkin'
-                        }
-                      } else {
-                        checkInData = {
-                          desc: 'Check Late',
-                          start: moment().toDate(),
-                          end: null,
-                          type: 'checkrate'
-                        }
-                      }
-                      fire.firestore().collection(`${user.email}/history/${moment().format('YYYY-MM')}`)
-                        .doc(`${moment().format('DD')}`)
-                        .set(checkInData)
-                        .then(() => {
-                          props.setShowAlert(false);
-                          setTimeout(() => {
-                            router.push('/home')
-                          }, 1500)
-                        })
-                        .catch((error) => {
-                          console.log(error)
-                          props.setAlertInner(<>
-                            <p>{error.message}</p>
-                          </>)
-                          props.setShowAlert(true);
-                        });
-                    } else {
-                      props.setShowAlert(false);
-                      setTimeout(() => {
-                        router.push('/home')
-                      }, 1500)
-                    }
-                  })
-                }
+                props.setShowAlert(false);
+                setTimeout(() => {
+                  router.push('/home')
+                }, 1500)
               })
               .catch((error) => {
                 props.setAlertInner(<>

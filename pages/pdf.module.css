@@ -1,6 +1,26 @@
+.page {
+    background: white;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #000;
+    width: 21cm;
+    height: 29.7cm;
+    min-width: 21cm;
+    min-height: 29.7cm;
+    max-width: 21cm;
+    max-height: 29.7cm;
+    margin-bottom: 50px;
+}
+
 .form {
-    width: 100%;
+    padding: 20px;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.mtAuto {
+    margin-top: auto;
 }
 
 .mb10 {
@@ -77,10 +97,12 @@
     font-size: 12px;
     font-family: 'Aleo', 'Noto Sans Thai', sans-serif;
 }
-.imgSignature{
+
+.imgSignature {
     width: auto;
     height: 60px;
 }
+
 p.textFont {
     padding: 0;
     margin: 0;
@@ -166,10 +188,11 @@ p.textFont {
     flex-direction: column;
     justify-content: flex-end;
     height: 138px;
+    margin-bottom: 50px;
 }
 
 .sendBTN {
-    width: 68px;
+    width: 90px;
     height: 33px;
     background: #E2D9B6;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -180,10 +203,34 @@ p.textFont {
     font-weight: bold;
     font-size: 18px;
     line-height: 25px;
-    color: #DBAB00;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #DBAB00;
     cursor: pointer;
+}
+
+.sendBTN2 {
+    width: 100px;
+    height: 33px;
+    background: #fff;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    font-family: 'Alef', 'Aleo', 'Noto Sans Thai', sans-serif;
+    margin-right: 15px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+    cursor: pointer;
+}
+
+.btnGroup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

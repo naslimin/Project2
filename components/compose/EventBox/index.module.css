@@ -93,6 +93,12 @@
     color: #fff;
     opacity: 0.5;
 }
+
+.leavework {
+    background-color: #faeec6 !important;
+    border: 2px solid #fff !important;
+}
+
 .textRed{
     color: red;
 }

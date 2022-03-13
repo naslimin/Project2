@@ -24,6 +24,15 @@ export default function LayoutLogin({ children }) {
               </AlertBox>
               : null
           }
+
+          {
+            children.props.showAlertNoClick ?
+              <AlertBox disableClick={true} clickOut={(e) => children.props.setShowAlertNoClick(!e)}>
+                {children.props.AlertInner}
+              </AlertBox>
+              : null
+          }
+
           {
             router.pathname == `/` ? <>
               <p className={styles.textNotCreateNow}>Don’t have any account yet?</p>

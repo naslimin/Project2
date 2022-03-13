@@ -7,11 +7,16 @@
     "deploy": "cd html && firebase deploy"
   },
   "dependencies": {
+    "chart.js": "^2.9.3",
     "firebase": "^8.10.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
+    "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "next": "latest",
     "react": "^17.0.2",
     "react-big-calendar": "^0.38.9",
+    "react-chartjs-2": "^2.9.0",
     "react-dom": "^17.0.2",
     "react-multi-date-picker": "^3.3.0"
   }

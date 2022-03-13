@@ -30,12 +30,19 @@ export default function Layout({ children, title }) {
           <Sidebar props={children.props} />
           {children}
           <div className={styles.secbar}>
-            <UserLoginBox />
+            <UserLoginBox props={children.props} />
             <ActivityBox />
           </div>
           {
             children.props.showAlert ?
               <AlertBox clickOut={(e) => children.props.setShowAlert(!e)}>
+                {children.props.AlertInner}
+              </AlertBox>
+              : null
+          }
+          {
+            children.props.showAlertNoClick ?
+              <AlertBox disableClick={true} clickOut={(e) => children.props.setShowAlertNoClick(!e)}>
                 {children.props.AlertInner}
               </AlertBox>
               : null

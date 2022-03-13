@@ -6,8 +6,12 @@ export default function EventBox({ element, props }) {
   const ShowStatus = () => {
     if (element.type == 'checkin') {
       return <span className={`${styles.textMain} ${styles.checkintype} ${styles.textBold} ${styles.checkin}`}>{element.desc}</span>
+    } else if (element.type == 'checkrate') {
+      return <span className={`${styles.textMain} ${styles.checkintype} ${styles.textBold} ${styles.checkrate}`}>{element.desc}</span>
+    } else if (element.type == 'leavework') {
+      return <span className={`${styles.textMain} ${styles.checkintype} ${styles.textBold} ${styles.leavework}`}>{element.desc}</span>
     } else {
-      return <span className={`${styles.textMain} ${styles.textBold}`}>{element.desc}</span>
+      return <span className={`${styles.textMain} ${styles.checkintype} ${styles.textBold} ${styles.checkin}`}>{element.desc}</span>
     }
   }
   return (
@@ -22,13 +26,19 @@ export default function EventBox({ element, props }) {
           <p className={`${styles.text} ${styles.textMain}`}>เวลา</p>
           <p className={`${styles.text} ${styles.textIndexTime}`}>
             <span className={`${styles.textSub} ${styles.textP}`}>เข้า</span>
-            <span className={`${styles.textMain} ${styles.textBold} ${styles.textP}`}>{moment(element.start).format('HH:mm')}</span>
+            <span className={`${styles.textMain} ${styles.textBold} ${styles.textP}`}>{
+            element.type == "leavework" ?
+            '--:--'
+            :moment(element.start).format('HH:mm')}</span>
             <span className={`${styles.textSub} ${styles.textP}`}>ออก</span>
             {
+              element.type == "leavework" ?
+              '--:--'
+              :
               element.end ?
                 <span className={`${styles.textMain} ${styles.textBold}`}>{moment(element.end).format('HH:mm')}</span>
                 :
-                <span className={`${styles.textMain} ${styles.textBold} ${styles.textRed}`}>รอบันทึกเวลาออก</span>
+                <span className={`${styles.textMain} ${styles.textBold}`}>--:--</span>
             }
           </p>
           <p className={`${styles.text} ${styles.mtauto}`}>

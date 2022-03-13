@@ -1,18 +1,22 @@
-import firebase from 'firebase';
+import app from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore'
+import 'firebase/storage'
 const firebaseConfig = {
-    apiKey: "AIzaSyCmLQt5c55M2FnsQERVkvGcXVE1O9uL9ls",
-    authDomain: "bwkschool-8a348.firebaseapp.com",
-    projectId: "bwkschool-8a348",
-    storageBucket: "bwkschool-8a348.appspot.com",
-    messagingSenderId: "865747928165",
-    appId: "1:865747928165:web:358f3f924076aa9e70b28c"
+    apiKey: "AIzaSyCCQXuk_uWAOeivn8wYlZhFqtn0C_ydf1A",
+    authDomain: "bwk-school.firebaseapp.com",
+    projectId: "bwk-school",
+    storageBucket: "bwk-school.appspot.com",
+    messagingSenderId: "33157085567",
+    appId: "1:33157085567:web:a86a2251bc44de1493824a"
 };
 try {
-    firebase.initializeApp(firebaseConfig);
+    app.initializeApp(firebaseConfig);
 } catch (err) {
     if (!/already exists/.test(err.message)) {
         console.error('Firebase initialization error', err.stack)
     }
 }
-const fire = firebase;
+
+const fire = app;
 export default fire;

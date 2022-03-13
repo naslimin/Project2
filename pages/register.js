@@ -25,8 +25,9 @@ export default function Register(props) {
     props.setAlertInner(<><img width={60} height={60} src='/icon/loading-buffering.gif' /></>)
     props.setShowAlert(true);
     fire.auth().createUserWithEmailAndPassword(state.Email, state.Password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         var user = userCredential.user;
+        await fire.auth().signOut()
         uploadBTN(user)
       })
       .catch((error) => {
@@ -38,7 +39,7 @@ export default function Register(props) {
   }
 
   const uploadBTN = (user) => {
-    var storage = fire.storage().ref(fileRef.name);
+    var storage = fire.storage().ref(`${state.Email}/${fileRef.name}`);
     storage.put(fileRef).then((snapshot) => {
       snapshot.ref.getDownloadURL().then(url => {
         fire.firestore().collection(state.Email).doc("userinfo").set({ ...state, Signature: url, uid: user.uid })
