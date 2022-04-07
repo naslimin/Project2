@@ -5,9 +5,10 @@ import { jsPDF } from "jspdf";
 import html2canvas from 'html2canvas';
 import { useEffect, useState } from 'react';
 import fire from '../config/firebase';
-
+import moment from 'moment';
 import { useRouter } from 'next/router'
 import InputTypeForm from '../components/compose/inputTypeFormText';
+moment.locale('th')
 export default function PDF(props) {
   const queryParams = new URLSearchParams(window.location.search);
   const router = useRouter()
@@ -34,6 +35,86 @@ export default function PDF(props) {
       document.getElementById('canvas_pdf').remove()
     });
   }
+
+  const _exportToEmail = () => {
+    props.setAlertInner(<><img width={60} height={60} src='/icon/loading-buffering.gif' /></>)
+    props.setShowAlert(true)
+    window.scrollTo(0, document.body.scrollHeight);
+    html2canvas(document.querySelector("#capture"), {
+      allowTaint: true,
+      useCORS: true,
+      scale: 1
+    }).then(canvas => {
+      canvas.id = "canvas_pdf"
+      document.body.appendChild(canvas);
+      const imgData = canvas.toDataURL('image/png');
+
+      var storage = fire.storage().ref(`${props.UserData.email}/${queryParams.get('id')}.png`);
+      storage.putString(imgData, 'data_url').then((snapshot) => {
+        snapshot.ref.getDownloadURL().then(url => {
+          Email.send({
+            Host: "smtp.elasticemail.com",
+            Username: "benzbenz900@gmail.com",
+            Password: "AEEEDBDB17F2159F357CBE548C452813FB0C",
+            To: props.UserData.email,
+            From: props.UserData.email,
+            Subject: `แบบฟร์อมการลางานของ ${state.i_am} เรื่อง ${state.subject}`,
+            Body: `
+            <p>(เขียนที่) ${state.w_at}</p>
+            <p>วันที่ ${state.date}/${state.mouth}/${state.year}</p>
+            <p>เรื่อง ${state.subject}</p>
+            <p>เรียน ${state.notice}</p>
+            <p>ข้าพเจ้า ${state.i_am}</p>
+            <p>ตำแหน่ง ${state.position}</p>
+            <p>สังกัด ${state.department}</p>
+            <p>ขอลา ${state.leavework}</p>
+            <p>เนื่องจาก ${state.due_to}</p>
+            <p>ตั้งแต่วันที่ ${moment(state.start_date).add(543, 'year').format('DD/MM/YYYY')}</p>
+            <p>ถึงวันที่ ${moment(state.end_date).add(543, 'year').format('DD/MM/YYYY')}</p>
+            <p>มีกำหนด ${state.total_days} วัน</p>
+            <p>ข้าพเจ้าได้ ${state.last_leavework} ครั้งสุดท้ายตั้งแต่วันที่ ${state.last_leave_start_date ? moment(state.last_leave_start_date).add(543, 'year').format('DD/MM/YYYY') : '-'} ถึงวันที่ ${state.last_leave_end_date ? moment(state.last_leave_end_date).add(543, 'year').format('DD/MM/YYYY') : '-'} มีกำหนด ${state.last_leave_total_days} วัน</p>
+            <p>ในระหว่างลาจะติดต่อข้าพเจ้าได้ที่ ${state.contact_at}</p>
+            <p>ขอแสดงความนับถือ</p>
+            <img width="200" height="200" src="${props.UserDataDetail.Signature}"/>
+            <p>ลงชื่อ ${state.i_am_signature}</p>
+            `,
+            Attachments: [
+              {
+                name: "แบบฟร์อมการลางาน.png",
+                path: url
+              }]
+          }).then(
+            message => {
+              if (message == 'OK') {
+                props.setAlertInner(<>
+                  <p>ส่งอีเมลเรียบร้อยแล้ว</p>
+                </>)
+                props.setShowAlert(true)
+              } else {
+                props.setAlertInner(<>
+                  <p>ไม่สามารถส่งอีเมลได้</p>
+                </>)
+                props.setShowAlert(true)
+              }
+
+            }
+          );
+        })
+      });
+
+      // window.open(`mailto:test@example.com?subject=แบบฟร์อมการลางาน&body=<img src=\"${imgData}\">`);
+      // const pdf = new jsPDF({
+      //   orientation: "p",
+      //   unit: "cm",
+      //   format: [29.7, 21],
+      //   compress: true
+      // });
+      // pdf.addImage(imgData, 'PNG', 0, 0);
+      // pdf.to
+
+      document.getElementById('canvas_pdf').remove()
+    });
+  }
   fire.firestore().collection(`${props.UserData.email}/leave/data`).doc(`${queryParams.get('id')}`).get()
     .then(async (doc) => {
       if (doc.exists) {
@@ -52,6 +133,9 @@ export default function PDF(props) {
               </div>
               <div onClick={() => _exportPdf()} className={`${styles.lineWarper} ${styles.sendBTNWarper}`}>
                 <div className={`${styles.sendBTN}`}>Print PDF</div>
+              </div>
+              <div onClick={() => _exportToEmail()} className={`${styles.lineWarper} ${styles.sendBTNWarper}`}>
+                <div className={`${styles.sendBTNEmail}`}>Send Email to {props.UserData.email}</div>
               </div>
             </div>
             <div id="capture" className={styles.page}>
@@ -140,13 +224,13 @@ export default function PDF(props) {
                       <p className={`${styles.textFont}`}>ขอลา</p>
                       <div className={`${styles.radioWarper} ${styles.wp100}`}>
                         <div className={`${styles.lineWarper} ${styles.textFont}`}>
-                          <input checked={state.last_leavework == 'ลาป่วย' ? true : false} className={`${styles.radioBox}`} name="leavework" type="radio" value={`ลาป่วย`}></input> <span>ลาป่วย</span>
+                          <input checked={state.leavework == 'ลาป่วย' ? true : false} className={`${styles.radioBox}`} name="leavework" type="radio" value={`ลาป่วย`}></input> <span>ลาป่วย</span>
                         </div>
                         <div className={`${styles.lineWarper} ${styles.textFont}`}>
-                          <input checked={state.last_leavework == 'ลากิจส่วนตัว' ? true : false} className={`${styles.radioBox}`} name="leavework" type="radio" value={`ลากิจส่วนตัว`}></input> <span>ลากิจส่วนตัว</span>
+                          <input checked={state.leavework == 'ลากิจส่วนตัว' ? true : false} className={`${styles.radioBox}`} name="leavework" type="radio" value={`ลากิจส่วนตัว`}></input> <span>ลากิจส่วนตัว</span>
                         </div>
                         <div className={`${styles.lineWarper} ${styles.textFont}`}>
-                          <input checked={state.last_leavework == 'ลาคลอดบุตร' ? true : false} className={`${styles.radioBox}`} name="leavework" type="radio" value={`ลาคลอดบุตร`}></input> <span>ลาคลอดบุตร</span>
+                          <input checked={state.leavework == 'ลาคลอดบุตร' ? true : false} className={`${styles.radioBox}`} name="leavework" type="radio" value={`ลาคลอดบุตร`}></input> <span>ลาคลอดบุตร</span>
                         </div>
                       </div>
                     </div>
@@ -163,13 +247,13 @@ export default function PDF(props) {
                     <div className={`${styles.lineWarper}`}>
                       <p className={`${styles.textFont}`}>ตั้งแต่วันที่</p>
                       <div className={`${styles.inputWarper} ${styles.vw18}`}>
-                        <InputTypeForm value={state.start_date} name="start_date" type="text"></InputTypeForm>
+                        <InputTypeForm value={moment(state.start_date).add(543, 'year').format('DD/MM/YYYY')} name="start_date" type="text"></InputTypeForm>
                       </div>
                     </div>
                     <div className={`${styles.lineWarper}`}>
                       <p className={`${styles.textFont}`}>ถึงวันที่</p>
                       <div className={`${styles.inputWarper} ${styles.vw18}`}>
-                        <InputTypeForm value={state.end_date} name="end_date" type="text"></InputTypeForm>
+                        <InputTypeForm value={moment(state.end_date).add(543, 'year').format('DD/MM/YYYY')} name="end_date" type="text"></InputTypeForm>
                       </div>
                     </div>
                     <div className={`${styles.lineWarper}`}>
@@ -202,7 +286,7 @@ export default function PDF(props) {
                     <div className={`${styles.lineWarper}`}>
                       <p className={`${styles.textFont}`}>ครั้งสุดท้ายตั้งแต่วันที่</p>
                       <div className={`${styles.inputWarper} ${styles.vw20}`}>
-                        <InputTypeForm value={state.last_leave_start_date} name="last_leave_start_date" type="text"></InputTypeForm>
+                        <InputTypeForm value={state.last_leave_start_date ? moment(state.last_leave_start_date).add(543, 'year').format('DD/MM/YYYY') : '-'} name="last_leave_start_date" type="text"></InputTypeForm>
                       </div>
                     </div>
                   </div>
@@ -212,7 +296,7 @@ export default function PDF(props) {
                     <div className={`${styles.lineWarper}`}>
                       <p className={`${styles.textFont}`}>ถึงวันที่</p>
                       <div className={`${styles.inputWarper} ${styles.vw18}`}>
-                        <InputTypeForm value={state.last_leave_end_date} name="last_leave_end_date" type="text"></InputTypeForm>
+                        <InputTypeForm value={state.last_leave_end_date ? moment(state.last_leave_end_date).add(543, 'year').format('DD/MM/YYYY') : '-'} name="last_leave_end_date" type="text"></InputTypeForm>
                       </div>
                     </div>
                     <div className={`${styles.lineWarper}`}>
