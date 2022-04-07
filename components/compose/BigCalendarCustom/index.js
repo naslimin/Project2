@@ -53,7 +53,7 @@ class MyCustomDateHeader extends React.Component {
             }
           } else {
             checkInData = {
-              desc: 'Check Rate',
+              desc: 'Check Late',
               start: moment().toDate(),
               end: null,
               type: 'checkrate'
