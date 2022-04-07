@@ -181,33 +181,39 @@ const ListEvents = () => {
       return null
     }
   }
-  return events.reverse().map((element, i) => {
-    return <div key={`ListEvents_${i}`} className={`${styles.eventWarper}`}>
-      <div className={`${styles.eventWarperTitle}`}>
-        <p className={`${styles.eventTitle}`}>{element.desc}</p>
-        <p className={`${styles.eventMonth}`}>{moment(element.start).format("LL")}</p>
-      </div>
-      <div className={`${styles.eventWarperTitle}`}>
-        <p className={`${styles.eventDate}
+  if (events.length == 0) {
+    return <>
+      <h5 class="text-center">No Events Data</h5><br/>
+    </>
+  } else {
+    return events.reverse().map((element, i) => {
+      return <div key={`ListEvents_${i}`} className={`${styles.eventWarper}`}>
+        <div className={`${styles.eventWarperTitle}`}>
+          <p className={`${styles.eventTitle}`}>{element.desc}</p>
+          <p className={`${styles.eventMonth}`}>{moment(element.start).format("LL")}</p>
+        </div>
+        <div className={`${styles.eventWarperTitle}`}>
+          <p className={`${styles.eventDate}
         ${checkDateCondition(element)}
         `}>{
-            element.type == "leavework" ?
-              '--:--'
-              :
-              element.end ?
-                <>
-                  <span>{moment(element.start).format('HH:mm')}</span>
-                  <span>{moment(element.end).format('HH:mm')}</span>
-                </>
+              element.type == "leavework" ?
+                '--:--'
                 :
-                <>
-                  <span>{moment(element.start).format('HH:mm')}</span>
-                  <span>--:--</span>
-                </>
-          }</p>
+                element.end ?
+                  <>
+                    <span>{moment(element.start).format('HH:mm')}</span>
+                    <span>{moment(element.end).format('HH:mm')}</span>
+                  </>
+                  :
+                  <>
+                    <span>{moment(element.start).format('HH:mm')}</span>
+                    <span>--:--</span>
+                  </>
+            }</p>
+        </div>
       </div>
-    </div>
-  });
+    });
+  }
 }
 
 class CustomToolbar extends React.Component {
