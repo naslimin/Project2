@@ -318,7 +318,7 @@ export default function Setting(props) {
           <InputType onBlur={handleChange} className={styles.spacer} defaultValue={state.Name} type="text" name="Name" placeholder="ชื่อ" />
         </InputEdit>
         <InputEdit title={`สกุล`}>
-          <InputType onBlur={handleChange} className={styles.spacer} defaultValue={state.Subname} type="text" name="Subname" placeholder="สกุล" />
+          <InputType onBlur={handleChange} className={styles.spacer} defaultValue={state.Subname} type="text" name="Surname" placeholder="สกุล" />
         </InputEdit>
       </>
     )
