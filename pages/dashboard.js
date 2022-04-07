@@ -80,7 +80,7 @@ export default function Dashboard(props) {
               var mouth = moment(moment().format(`YYYY-${listD.month}-DD`)).month()
               total_days_sum+=listD.total_days
               return (
-                <p onClick={() => router.push(`/pdf?id=${listD.refid}`)} className={styles.titleText2}>ครั้งที่ {index + 1} เดือน{listM[mouth]}   เป็นจำนวน {listD.total_days} วัน</p>
+                <p onClick={() => router.push(`/pdf?id=${listD.refid}`)} className={`${styles.titleText2} ${styles.onclick}`}>ครั้งที่ {index + 1} เดือน{listM[mouth]}   เป็นจำนวน {listD.total_days} วัน</p>
               )
             })
           }

@@ -11,6 +11,13 @@
     background: rgba(219, 171, 0, 0.7);
     border-radius: 20px;
 }
+.onclick{
+    cursor: pointer;
+}
+.onclick:hover{
+    cursor: pointer;
+    color: cadetblue;
+}
 .form {
     min-width: 451px;
     min-height: 476px;
