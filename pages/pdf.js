@@ -87,7 +87,10 @@ export default function PDF(props) {
             message => {
               if (message == 'OK') {
                 props.setAlertInner(<>
-                  <p>ส่งอีเมลเรียบร้อยแล้ว</p>
+                  <p>
+                    ส่งอีเมลเรียบร้อยแล้ว<br/>
+                    กรุณาตรวจสอบในถังขยะของอีเมล์ด้วย
+                  </p>
                 </>)
                 props.setShowAlert(true)
               } else {
