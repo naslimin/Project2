@@ -68,6 +68,24 @@ export default function LeaveForm(props) {
     }));
   };
 
+  const handleChangeDate = e => {
+    const { name, value } = e.target;
+    if (value.length > 9) {
+      if (moment(value).isValid()) {
+        setState(prevState => ({
+          ...prevState,
+          [name]: value
+        }));
+      } else {
+        props.setAlertInner(<>
+          <p>รูปแบบวันที่ไม่ถูกต้อง<br />
+            เช่น 20/04/2022</p>
+        </>)
+        props.setShowAlert(true)
+      }
+    }
+  };
+
   const sendForm = async () => {
 
     props.setAlertInner(<><img width={60} height={60} src='/icon/loading-buffering.gif' /></>)
@@ -266,19 +284,19 @@ export default function LeaveForm(props) {
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>ตั้งแต่วันที่</p>
               <div className={`${styles.inputWarper} ${styles.vw18}`}>
-                <InputTypeForm value={state.start_date} onChange={handleChange} name="start_date" type="date"></InputTypeForm>
+                <InputTypeForm value={state.start_date} onChange={handleChangeDate} name="start_date" type="date"></InputTypeForm>
               </div>
             </div>
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>ถึงวันที่</p>
               <div className={`${styles.inputWarper} ${styles.vw18}`}>
-                <InputTypeForm value={state.end_date} onChange={handleChange} name="end_date" type="date"></InputTypeForm>
+                <InputTypeForm value={state.end_date} onChange={handleChangeDate} name="end_date" type="date"></InputTypeForm>
               </div>
             </div>
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>มีกำหนด</p>
               <div className={`${styles.inputWarper} ${styles.vw4}`}>
-                <InputTypeForm value={state.total_days} onChange={handleChange} name="total_days" type="number"></InputTypeForm>
+                <InputTypeForm readOnly={true} value={state.total_days} onChange={handleChange} name="total_days" type="number"></InputTypeForm>
               </div>
               <p className={`${styles.textFont}`}>วัน</p>
             </div>
@@ -305,7 +323,7 @@ export default function LeaveForm(props) {
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>ครั้งสุดท้ายตั้งแต่วันที่</p>
               <div className={`${styles.inputWarper} ${styles.vw20}`}>
-                <InputTypeForm value={state.last_leave_start_date} onChange={handleChange} name="last_leave_start_date" type="date"></InputTypeForm>
+                <InputTypeForm value={state.last_leave_start_date} onChange={handleChangeDate} name="last_leave_start_date" type="date"></InputTypeForm>
               </div>
             </div>
           </div>
@@ -315,13 +333,13 @@ export default function LeaveForm(props) {
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>ถึงวันที่</p>
               <div className={`${styles.inputWarper} ${styles.vw18}`}>
-                <InputTypeForm value={state.last_leave_end_date} onChange={handleChange} name="last_leave_end_date" type="date"></InputTypeForm>
+                <InputTypeForm value={state.last_leave_end_date} onChange={handleChangeDate} name="last_leave_end_date" type="date"></InputTypeForm>
               </div>
             </div>
             <div className={`${styles.lineWarper}`}>
               <p className={`${styles.textFont}`}>มีกำหนด</p>
               <div className={`${styles.inputWarper} ${styles.vw15}`}>
-                <InputTypeForm value={state.last_leave_total_days} onChange={handleChange} name="last_leave_total_days" type="number"></InputTypeForm>
+                <InputTypeForm readOnly={true} value={state.last_leave_total_days} onChange={handleChange} name="last_leave_total_days" type="number"></InputTypeForm>
               </div>
               <p className={`${styles.textFont}`}>วัน</p>
             </div>
