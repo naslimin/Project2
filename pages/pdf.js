@@ -55,9 +55,9 @@ export default function PDF(props) {
           Email.send({
             Host: "smtp.elasticemail.com",
             Username: "benzbenz900@gmail.com",
-            Password: "AEEEDBDB17F2159F357CBE548C452813FB0C",
+            Password: "E43D8683392F3FED01F10F6F7345AE981E1C",
             To: props.UserData.email,
-            From: props.UserData.email,
+            From: 'benzbenz900@gmail.com',
             Subject: `แบบฟร์อมการลางานของ ${state.i_am} เรื่อง ${state.subject}`,
             Body: `
             <p>(เขียนที่) ${state.w_at}</p>
@@ -75,7 +75,7 @@ export default function PDF(props) {
             <p>ข้าพเจ้าได้ ${state.last_leavework} ครั้งสุดท้ายตั้งแต่วันที่ ${state.last_leave_start_date ? moment(state.last_leave_start_date).add(543, 'year').format('DD/MM/YYYY') : '-'} ถึงวันที่ ${state.last_leave_end_date ? moment(state.last_leave_end_date).add(543, 'year').format('DD/MM/YYYY') : '-'} มีกำหนด ${state.last_leave_total_days} วัน</p>
             <p>ในระหว่างลาจะติดต่อข้าพเจ้าได้ที่ ${state.contact_at}</p>
             <p>ขอแสดงความนับถือ</p>
-            <img width="200" height="200" src="${props.UserDataDetail.Signature}"/>
+            <img width="200" height="200" src="${state.UserDataDetail.Signature}"/>
             <p>ลงชื่อ ${state.i_am_signature}</p>
             `,
             Attachments: [
@@ -88,7 +88,7 @@ export default function PDF(props) {
               if (message == 'OK') {
                 props.setAlertInner(<>
                   <p>
-                    ส่งอีเมลเรียบร้อยแล้ว<br/>
+                    ส่งอีเมลเรียบร้อยแล้ว<br />
                     กรุณาตรวจสอบในถังขยะของอีเมล์ด้วย
                   </p>
                 </>)
@@ -118,12 +118,18 @@ export default function PDF(props) {
       document.getElementById('canvas_pdf').remove()
     });
   }
-  fire.firestore().collection(`${props.UserData.email}/leave/data`).doc(`${queryParams.get('id')}`).get()
-    .then(async (doc) => {
-      if (doc.exists) {
-        setState(doc.data())
-      }
-    })
+
+  useEffect(() => {
+    if (!state) {
+      fire.firestore().collection(`${props.UserData.email}/leave/data`).doc(`${queryParams.get('id')}`).get()
+        .then(async (doc) => {
+          if (doc.exists) {
+            console.log(doc.data())
+            setState(doc.data())
+          }
+        })
+    }
+  }, [])
 
   return (
     <>
@@ -250,13 +256,13 @@ export default function PDF(props) {
                     <div className={`${styles.lineWarper}`}>
                       <p className={`${styles.textFont}`}>ตั้งแต่วันที่</p>
                       <div className={`${styles.inputWarper} ${styles.vw18}`}>
-                        <InputTypeForm value={moment(state.start_date).add(543, 'year').format('DD/MM/YYYY')} name="start_date" type="text"></InputTypeForm>
+                        <InputTypeForm value={moment(state.start_date.seconds*1000).add(543, 'year').format('DD/MM/YYYY')} name="start_date" type="text"></InputTypeForm>
                       </div>
                     </div>
                     <div className={`${styles.lineWarper}`}>
                       <p className={`${styles.textFont}`}>ถึงวันที่</p>
                       <div className={`${styles.inputWarper} ${styles.vw18}`}>
-                        <InputTypeForm value={moment(state.end_date).add(543, 'year').format('DD/MM/YYYY')} name="end_date" type="text"></InputTypeForm>
+                        <InputTypeForm value={moment(state.end_date.seconds*1000).add(543, 'year').format('DD/MM/YYYY')} name="end_date" type="text"></InputTypeForm>
                       </div>
                     </div>
                     <div className={`${styles.lineWarper}`}>
@@ -289,7 +295,7 @@ export default function PDF(props) {
                     <div className={`${styles.lineWarper}`}>
                       <p className={`${styles.textFont}`}>ครั้งสุดท้ายตั้งแต่วันที่</p>
                       <div className={`${styles.inputWarper} ${styles.vw20}`}>
-                        <InputTypeForm value={state.last_leave_start_date ? moment(state.last_leave_start_date).add(543, 'year').format('DD/MM/YYYY') : '-'} name="last_leave_start_date" type="text"></InputTypeForm>
+                        <InputTypeForm value={state.last_leave_start_date ? moment(state.last_leave_start_date.seconds*1000).add(543, 'year').format('DD/MM/YYYY') : '-'} name="last_leave_start_date" type="text"></InputTypeForm>
                       </div>
                     </div>
                   </div>
@@ -299,13 +305,13 @@ export default function PDF(props) {
                     <div className={`${styles.lineWarper}`}>
                       <p className={`${styles.textFont}`}>ถึงวันที่</p>
                       <div className={`${styles.inputWarper} ${styles.vw18}`}>
-                        <InputTypeForm value={state.last_leave_end_date ? moment(state.last_leave_end_date).add(543, 'year').format('DD/MM/YYYY') : '-'} name="last_leave_end_date" type="text"></InputTypeForm>
+                        <InputTypeForm value={state.last_leave_end_date ? moment(state.last_leave_end_date.seconds*1000).add(543, 'year').format('DD/MM/YYYY') : '-'} name="last_leave_end_date" type="text"></InputTypeForm>
                       </div>
                     </div>
                     <div className={`${styles.lineWarper}`}>
                       <p className={`${styles.textFont}`}>มีกำหนด</p>
                       <div className={`${styles.inputWarper} ${styles.vw15}`}>
-                        <InputTypeForm value={state.last_leave_total_days} name="last_leave_total_days" type="text"></InputTypeForm>
+                        <InputTypeForm value={state.last_leave_total_days ? state.last_leave_total_days : '-'} name="last_leave_total_days" type="text"></InputTypeForm>
                       </div>
                       <p className={`${styles.textFont}`}>วัน</p>
                     </div>
@@ -332,11 +338,7 @@ export default function PDF(props) {
                     <div className={`${styles.lineWarper} ${styles.flexColumn} ${styles.lineWarperBetween}`}>
                       <p className={`${styles.textFont}`}>ขอแสดงความนับถือ</p>
                       <div className={`${styles.signature} ${styles.mb15} ${styles.mt15}`}>
-                        <div className={styles.imgSignature} style={{
-                          backgroundImage: `url(${props.UserDataDetail.Signature})`,
-                          backgroundRepeat: 'no-repeat',
-                          backgroundSize: 'contain'
-                        }}></div>
+                        <img className={styles.imgSignature} src={state.UserDataDetail.Signature}/>
                       </div>
                       <div className={`${styles.lineWarper}`}>
                         <p className={`${styles.textFont}`}>ลงชื่อ</p>
