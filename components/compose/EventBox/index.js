@@ -47,7 +47,7 @@ export default function EventBox({ element, props }) {
           </p>
         </div>
         <div className={`${styles.warperBoxBodyImage}`}>
-          <img src={props.UserDataDetail.Signature} width={160} height={91}></img>
+          <img src={props.UserDataDetail.Signature} height={91}></img>
           <p className={`${styles.text} {styles.textMain}`}>-Signature-</p>
         </div>
       </div>
