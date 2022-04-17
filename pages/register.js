@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 
 export default function Register(props) {
   const [nextRegister, setNextRegister] = useState(false)
-  const [state, setState] = useState({ Name: "", Subname: "", Email: "", Password: "", CPassword: "", position: "" });
+  const [state, setState] = useState({ Name: "", Surname: "", Email: "", Password: "", CPassword: "", position: "" });
   const [fileRef, setFileRef] = useState(false);
   const upload = useRef(null)
   const [imagePreviewRef, setImagePreviewRef] = useState(false)
@@ -66,7 +66,7 @@ export default function Register(props) {
   }
 
   const nextRegisterSetp = () => {
-    if (!state.Name || !state.Subname || !state.Email || !state.Password || !state.CPassword) {
+    if (!state.Name || !state.Surname || !state.Email || !state.Password || !state.CPassword) {
       props.setAlertInner(<>
         <p>กรุณากรอกข้อมูลให้ครบ</p>
       </>)
@@ -120,7 +120,7 @@ export default function Register(props) {
           <>
             <h2 className={styles.textTitle}>Register</h2>
             <InputType className={styles.spacer} value={state.Name} onChange={handleChange} type="text" name="Name" placeholder="Name" />
-            <InputType className={styles.spacer} value={state.Subname} onChange={handleChange} type="text" name="Surname" placeholder="Surname" />
+            <InputType className={styles.spacer} value={state.Surname} onChange={handleChange} type="text" name="Surname" placeholder="Surname" />
             <InputType className={styles.spacer} value={state.Email} onChange={handleChange} type="email" name="Email" placeholder="Email" />
             <InputType className={styles.spacer} value={state.Password} onChange={handleChange} type="password" name="Password" placeholder="Password" />
             <InputType className={styles.spacer} value={state.CPassword} onChange={handleChange} type="password" name="CPassword" placeholder="Confirm password" />
