@@ -311,14 +311,14 @@ export default function Setting(props) {
     )
   }
 
-  const NameAndSubNameEdit = () => {
+  const NameAndSurnameEdit = () => {
     return (
       <>
         <InputEdit title={`ชื่อ`}>
           <InputType onBlur={handleChange} className={styles.spacer} defaultValue={state.Name} type="text" name="Name" placeholder="ชื่อ" />
         </InputEdit>
         <InputEdit title={`สกุล`}>
-          <InputType onBlur={handleChange} className={styles.spacer} defaultValue={state.Subname} type="text" name="Surname" placeholder="สกุล" />
+          <InputType onBlur={handleChange} className={styles.spacer} defaultValue={state.Surname} type="text" name="Surname" placeholder="สกุล" />
         </InputEdit>
       </>
     )
@@ -326,8 +326,8 @@ export default function Setting(props) {
 
   const RenderEditModel = () => {
     switch (editModel) {
-      case 'NameAndSubNameEdit':
-        return <NameAndSubNameEdit />
+      case 'NameAndSurnameEdit':
+        return <NameAndSurnameEdit />
       case 'EmailEdit':
         return <EmailEdit />
       case 'PositionEdit':
@@ -363,8 +363,8 @@ export default function Setting(props) {
 
         <div className={`${styles.warperLine}`}>
           <div className={`${styles.warperLineTitle}`}>ชื่อผู้ใช้งาน</div>
-          <div className={`${styles.warperLineValue}`}>{props.UserDataDetail.Name} {props.UserDataDetail.Subname}</div>
-          <div onClick={() => ActionEdit('NameAndSubNameEdit')} className={`${styles.warperLineAction}`}>แก้ไข</div>
+          <div className={`${styles.warperLineValue}`}>{props.UserDataDetail.Name} {props.UserDataDetail.Surname}</div>
+          <div onClick={() => ActionEdit('NameAndSurnameEdit')} className={`${styles.warperLineAction}`}>แก้ไข</div>
         </div>
 
         <div className={`${styles.warperLine}`}>
