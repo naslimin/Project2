@@ -20,7 +20,7 @@ export default function UserInfo(props) {
         </div>
         <div className={`${styles.warperboxitem} ${styles.mb}`}>
           <div className={`${styles.warperboxbody}`}>
-            <p className={`${styles.title}`}>ชื่อ-สกุล : {props.UserDataDetail.Name} {props.UserDataDetail.Subname}</p>
+            <p className={`${styles.title}`}>ชื่อ-สกุล : {props.UserDataDetail.Name} {props.UserDataDetail.Surname}</p>
             <p className={`${styles.title}`}>ตำหน่ง : {props.UserDataDetail.position || '-'}</p>
             <p className={`${styles.title}`}>ประเภท : {props.UserDataDetail.userType || '-'}</p>
             <p className={`${styles.title}`}>วิทยฐานะ : {props.UserDataDetail.userLevel || '-'}</p>
