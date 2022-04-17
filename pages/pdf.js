@@ -69,10 +69,10 @@ export default function PDF(props) {
             <p>สังกัด ${state.department}</p>
             <p>ขอลา ${state.leavework}</p>
             <p>เนื่องจาก ${state.due_to}</p>
-            <p>ตั้งแต่วันที่ ${moment(state.start_date).add(543, 'year').format('DD/MM/YYYY')}</p>
-            <p>ถึงวันที่ ${moment(state.end_date).add(543, 'year').format('DD/MM/YYYY')}</p>
+            <p>ตั้งแต่วันที่ ${moment(state.start_date.seconds*1000).add(543, 'year').format('DD/MM/YYYY')}</p>
+            <p>ถึงวันที่ ${moment(state.end_date.seconds*1000).add(543, 'year').format('DD/MM/YYYY')}</p>
             <p>มีกำหนด ${state.total_days} วัน</p>
-            <p>ข้าพเจ้าได้ ${state.last_leavework} ครั้งสุดท้ายตั้งแต่วันที่ ${state.last_leave_start_date ? moment(state.last_leave_start_date).add(543, 'year').format('DD/MM/YYYY') : '-'} ถึงวันที่ ${state.last_leave_end_date ? moment(state.last_leave_end_date).add(543, 'year').format('DD/MM/YYYY') : '-'} มีกำหนด ${state.last_leave_total_days} วัน</p>
+            <p>ข้าพเจ้าได้ ${state.last_leavework} ครั้งสุดท้ายตั้งแต่วันที่ ${state.last_leave_start_date ? moment(state.last_leave_start_date.seconds*1000).add(543, 'year').format('DD/MM/YYYY') : '-'} ถึงวันที่ ${state.last_leave_end_date ? moment(state.last_leave_end_date.seconds*1000).add(543, 'year').format('DD/MM/YYYY') : '-'} มีกำหนด ${state.last_leave_total_days} วัน</p>
             <p>ในระหว่างลาจะติดต่อข้าพเจ้าได้ที่ ${state.contact_at}</p>
             <p>ขอแสดงความนับถือ</p>
             <img width="200" height="200" src="${state.UserDataDetail.Signature}"/>

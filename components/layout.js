@@ -24,7 +24,8 @@ export default function Layout({ children, title }) {
       <>
         <Head>
           <title>{title}</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          {/* <meta name="viewport" content="width=device-width, initial-scale=1.0"/> */}
+          <meta content="width=1280, initial-scale=1.0; " name="viewport"></meta>
         </Head>
         <main className={styles.main}>
           <Sidebar props={children.props} />

@@ -9,6 +9,7 @@ export default function LayoutLogin({ children }) {
     <>
       <Head>
         <title>โรงเรียนบ้านวังกะพ้อ เพียรอนุสรณ์</title>
+        <meta content="width=1280, initial-scale=1.0; " name="viewport"></meta>
       </Head>
       <main className={styles.main}>
         <div>
