@@ -48,6 +48,10 @@
         "destination": "/pdf.html"
       },
       {
+        "source": "/index_gps",
+        "destination": "/index_gps.html"
+      },
+      {
         "source": "**",
         "destination": "/404.html"
       }
