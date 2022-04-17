@@ -103,6 +103,7 @@ export default function Index(props) {
       </div>
       {/* <Link href={'home'}> */}
       <div onClick={() => loginCheck()} className={`${styles.loginBTN} fontText`}>Login</div>
+      {/* <div onClick={() => router.push('/index_gps')} className={`${styles.loginBTN_new} fontText`}>GPS</div> */}
       {/* </Link> */}
     </>
   )
