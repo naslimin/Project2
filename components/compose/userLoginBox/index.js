@@ -10,7 +10,7 @@ export default function UserLoginBox({ props}) {
         <img src="/icon/alert.png" alt="Alert" width="20" height="20" />
       </div>
       <div className={styles.user}>
-        <div className={styles.username}>{props.UserDataDetail.Name} {props.UserDataDetail.Subname}</div>
+        <div className={styles.username}>{props.UserDataDetail.Name} {props.UserDataDetail.Surname}</div>
         <AvatarUser src={props.UserDataDetail.Image}/>
       </div>
     </div>
