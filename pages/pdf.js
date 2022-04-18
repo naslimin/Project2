@@ -15,6 +15,8 @@ export default function PDF(props) {
   const [state, setState] = useState(false)
 
   const _exportPdf = () => {
+    props.setAlertInner(<><img width={60} height={60} src='/icon/loading-buffering.gif' /></>)
+    props.setShowAlert(true)
     window.scrollTo(0, document.body.scrollHeight);
     html2canvas(document.querySelector("#capture"), {
       allowTaint: true,
@@ -31,10 +33,38 @@ export default function PDF(props) {
         compress: true
       });
       pdf.addImage(imgData, 'PNG', 0, 0);
-      pdf.save("download.pdf");
+      pdf.save(`แบบฟร์อมการลางานของ ${state.i_am} เรื่อง ${state.subject}.pdf`);
       document.getElementById('canvas_pdf').remove()
+      props.setShowAlert(false)
     });
   }
+
+  // const _sharePdf = () => {
+  //   props.setAlertInner(<><img width={60} height={60} src='/icon/loading-buffering.gif' /></>)
+  //   props.setShowAlert(true)
+  //   window.scrollTo(0, document.body.scrollHeight);
+  //   html2canvas(document.querySelector("#capture"), {
+  //     allowTaint: true,
+  //     useCORS: true,
+  //     scale: 1
+  //   }).then(canvas => {
+  //     canvas.id = "canvas_pdf"
+  //     document.body.appendChild(canvas);
+  //     const imgData = canvas.toDataURL('image/png');
+
+  //     var storage = fire.storage().ref(`${props.UserData.email}/${queryParams.get('id')}.png`);
+  //     storage.putString(imgData, 'data_url').then((snapshot) => {
+  //       snapshot.ref.getDownloadURL().then(url => {
+  //         window.open(url,'popUpWindow','height=500,width=400,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no, status=yes')
+  //         props.setAlertInner(<>
+  //           <textarea readOnly rows="5" cols="50">{url}</textarea>
+  //         </>)
+  //         props.setShowAlert(true)
+  //       })
+  //     });
+  //     document.getElementById('canvas_pdf').remove()
+  //   });
+  // }
 
   const _exportToEmail = () => {
     props.setAlertInner(<><img width={60} height={60} src='/icon/loading-buffering.gif' /></>)
@@ -54,10 +84,10 @@ export default function PDF(props) {
         snapshot.ref.getDownloadURL().then(url => {
           Email.send({
             Host: "smtp.elasticemail.com",
-            Username: "benzbenz900@gmail.com",
-            Password: "E43D8683392F3FED01F10F6F7345AE981E1C",
+            Username: "naslimin.fw@gmail.com",
+            Password: "BD50A95877E231CB34123AE1E1748A61CE91",
             To: props.UserData.email,
-            From: 'benzbenz900@gmail.com',
+            From: 'naslimin.fw@gmail.com',
             Subject: `แบบฟร์อมการลางานของ ${state.i_am} เรื่อง ${state.subject}`,
             Body: `
             <p>(เขียนที่) ${state.w_at}</p>
@@ -69,10 +99,10 @@ export default function PDF(props) {
             <p>สังกัด ${state.department}</p>
             <p>ขอลา ${state.leavework}</p>
             <p>เนื่องจาก ${state.due_to}</p>
-            <p>ตั้งแต่วันที่ ${moment(state.start_date.seconds*1000).add(543, 'year').format('DD/MM/YYYY')}</p>
-            <p>ถึงวันที่ ${moment(state.end_date.seconds*1000).add(543, 'year').format('DD/MM/YYYY')}</p>
+            <p>ตั้งแต่วันที่ ${moment(state.start_date.seconds * 1000).add(543, 'year').format('DD/MM/YYYY')}</p>
+            <p>ถึงวันที่ ${moment(state.end_date.seconds * 1000).add(543, 'year').format('DD/MM/YYYY')}</p>
             <p>มีกำหนด ${state.total_days} วัน</p>
-            <p>ข้าพเจ้าได้ ${state.last_leavework} ครั้งสุดท้ายตั้งแต่วันที่ ${state.last_leave_start_date ? moment(state.last_leave_start_date.seconds*1000).add(543, 'year').format('DD/MM/YYYY') : '-'} ถึงวันที่ ${state.last_leave_end_date ? moment(state.last_leave_end_date.seconds*1000).add(543, 'year').format('DD/MM/YYYY') : '-'} มีกำหนด ${state.last_leave_total_days} วัน</p>
+            <p>ข้าพเจ้าได้ ${state.last_leavework} ครั้งสุดท้ายตั้งแต่วันที่ ${state.last_leave_start_date ? moment(state.last_leave_start_date.seconds * 1000).add(543, 'year').format('DD/MM/YYYY') : '-'} ถึงวันที่ ${state.last_leave_end_date ? moment(state.last_leave_end_date.seconds * 1000).add(543, 'year').format('DD/MM/YYYY') : '-'} มีกำหนด ${state.last_leave_total_days} วัน</p>
             <p>ในระหว่างลาจะติดต่อข้าพเจ้าได้ที่ ${state.contact_at}</p>
             <p>ขอแสดงความนับถือ</p>
             <img width="200" height="200" src="${state.UserDataDetail.Signature}"/>
@@ -80,7 +110,7 @@ export default function PDF(props) {
             `,
             Attachments: [
               {
-                name: "แบบฟร์อมการลางาน.png",
+                name: `แบบฟร์อมการลางานของ ${state.i_am} เรื่อง ${state.subject}.png`,
                 path: url
               }]
           }).then(
@@ -143,9 +173,13 @@ export default function PDF(props) {
               <div onClick={() => _exportPdf()} className={`${styles.lineWarper} ${styles.sendBTNWarper}`}>
                 <div className={`${styles.sendBTN}`}>Print PDF</div>
               </div>
+              {/* <div onClick={() => _sharePdf()} className={`${styles.lineWarper} ${styles.sendBTNWarper}`}>
+                <div className={`${styles.sendBTNShare}`}>Share PDF</div>
+              </div> */}
               <div onClick={() => _exportToEmail()} className={`${styles.lineWarper} ${styles.sendBTNWarper}`}>
                 <div className={`${styles.sendBTNEmail}`}>Send Email to {props.UserData.email}</div>
               </div>
+              
             </div>
             <div id="capture" className={styles.page}>
               <div className={`${styles.form}`}>
@@ -256,13 +290,13 @@ export default function PDF(props) {
                     <div className={`${styles.lineWarper}`}>
                       <p className={`${styles.textFont}`}>ตั้งแต่วันที่</p>
                       <div className={`${styles.inputWarper} ${styles.vw18}`}>
-                        <InputTypeForm value={moment(state.start_date.seconds*1000).add(543, 'year').format('DD/MM/YYYY')} name="start_date" type="text"></InputTypeForm>
+                        <InputTypeForm value={moment(state.start_date.seconds * 1000).add(543, 'year').format('DD/MM/YYYY')} name="start_date" type="text"></InputTypeForm>
                       </div>
                     </div>
                     <div className={`${styles.lineWarper}`}>
                       <p className={`${styles.textFont}`}>ถึงวันที่</p>
                       <div className={`${styles.inputWarper} ${styles.vw18}`}>
-                        <InputTypeForm value={moment(state.end_date.seconds*1000).add(543, 'year').format('DD/MM/YYYY')} name="end_date" type="text"></InputTypeForm>
+                        <InputTypeForm value={moment(state.end_date.seconds * 1000).add(543, 'year').format('DD/MM/YYYY')} name="end_date" type="text"></InputTypeForm>
                       </div>
                     </div>
                     <div className={`${styles.lineWarper}`}>
@@ -295,7 +329,7 @@ export default function PDF(props) {
                     <div className={`${styles.lineWarper}`}>
                       <p className={`${styles.textFont}`}>ครั้งสุดท้ายตั้งแต่วันที่</p>
                       <div className={`${styles.inputWarper} ${styles.vw20}`}>
-                        <InputTypeForm value={state.last_leave_start_date ? moment(state.last_leave_start_date.seconds*1000).add(543, 'year').format('DD/MM/YYYY') : '-'} name="last_leave_start_date" type="text"></InputTypeForm>
+                        <InputTypeForm value={state.last_leave_start_date ? moment(state.last_leave_start_date.seconds * 1000).add(543, 'year').format('DD/MM/YYYY') : '-'} name="last_leave_start_date" type="text"></InputTypeForm>
                       </div>
                     </div>
                   </div>
@@ -305,7 +339,7 @@ export default function PDF(props) {
                     <div className={`${styles.lineWarper}`}>
                       <p className={`${styles.textFont}`}>ถึงวันที่</p>
                       <div className={`${styles.inputWarper} ${styles.vw18}`}>
-                        <InputTypeForm value={state.last_leave_end_date ? moment(state.last_leave_end_date.seconds*1000).add(543, 'year').format('DD/MM/YYYY') : '-'} name="last_leave_end_date" type="text"></InputTypeForm>
+                        <InputTypeForm value={state.last_leave_end_date ? moment(state.last_leave_end_date.seconds * 1000).add(543, 'year').format('DD/MM/YYYY') : '-'} name="last_leave_end_date" type="text"></InputTypeForm>
                       </div>
                     </div>
                     <div className={`${styles.lineWarper}`}>
@@ -338,7 +372,7 @@ export default function PDF(props) {
                     <div className={`${styles.lineWarper} ${styles.flexColumn} ${styles.lineWarperBetween}`}>
                       <p className={`${styles.textFont}`}>ขอแสดงความนับถือ</p>
                       <div className={`${styles.signature} ${styles.mb15} ${styles.mt15}`}>
-                        <img className={styles.imgSignature} src={state.UserDataDetail.Signature}/>
+                        <img className={styles.imgSignature} src={state.UserDataDetail.Signature} />
                       </div>
                       <div className={`${styles.lineWarper}`}>
                         <p className={`${styles.textFont}`}>ลงชื่อ</p>
