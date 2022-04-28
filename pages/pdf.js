@@ -33,7 +33,7 @@ export default function PDF(props) {
         compress: true
       });
       pdf.addImage(imgData, 'PNG', 0, 0);
-      pdf.save(`แบบฟร์อมการลางานของ ${state.i_am} เรื่อง ${state.subject}.pdf`);
+      pdf.save(`แบบฟอร์มการลางานของ ${state.i_am} เรื่อง ${state.subject}.pdf`);
       document.getElementById('canvas_pdf').remove()
       props.setShowAlert(false)
     });
@@ -88,7 +88,7 @@ export default function PDF(props) {
             Password: "BD50A95877E231CB34123AE1E1748A61CE91",
             To: props.UserData.email,
             From: 'naslimin.fw@gmail.com',
-            Subject: `แบบฟร์อมการลางานของ ${state.i_am} เรื่อง ${state.subject}`,
+            Subject: `แบบฟอร์มการลางานของ ${state.i_am} เรื่อง ${state.subject}`,
             Body: `
             <p>(เขียนที่) ${state.w_at}</p>
             <p>วันที่ ${state.date}/${state.mouth}/${state.year}</p>
@@ -110,7 +110,7 @@ export default function PDF(props) {
             `,
             Attachments: [
               {
-                name: `แบบฟร์อมการลางานของ ${state.i_am} เรื่อง ${state.subject}.png`,
+                name: `แบบฟอร์มการลางานของ ${state.i_am} เรื่อง ${state.subject}.png`,
                 path: url
               }]
           }).then(
@@ -135,7 +135,7 @@ export default function PDF(props) {
         })
       });
 
-      // window.open(`mailto:test@example.com?subject=แบบฟร์อมการลางาน&body=<img src=\"${imgData}\">`);
+      // window.open(`mailto:test@example.com?subject=แบบฟอร์มการลางาน&body=<img src=\"${imgData}\">`);
       // const pdf = new jsPDF({
       //   orientation: "p",
       //   unit: "cm",
@@ -396,7 +396,7 @@ export default function PDF(props) {
 
 PDF.getLayout = function getLayout(page) {
   return (
-    <Layout title={'แบบฟร์อมการลางาน'}>
+    <Layout title={'แบบฟอร์มการลางาน'}>
       {page}
     </Layout>
   )

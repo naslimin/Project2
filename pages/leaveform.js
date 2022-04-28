@@ -98,7 +98,7 @@ export default function LeaveForm(props) {
       !state.w_at ||
       !state.year) {
         props.setAlertInner(<>
-        <p>กรุณากรอกข้อมูลให้ครบ ก่อนส่งแบบฟร์อม</p>
+        <p>กรุณากรอกข้อมูลให้ครบ ก่อนส่งแบบฟอร์ม</p>
         </>)
         props.setShowAlert(true)
     } else {
@@ -171,7 +171,7 @@ export default function LeaveForm(props) {
     <>
       {state ?
         <section>
-          <h2>แบบฟร์อมการลางาน</h2>
+          <h2>แบบฟอร์มการลางาน</h2>
           <div className={`${styles.form}`}>
             <div className={`${styles.mb15}`}>
               <div className={`${styles.lineWarper} ${styles.lineWarperRight}`}>
@@ -388,7 +388,7 @@ export default function LeaveForm(props) {
 
 LeaveForm.getLayout = function getLayout(page) {
   return (
-    <Layout title={'แบบฟร์อมการลางาน'}>
+    <Layout title={'แบบฟอร์มการลางาน'}>
       {page}
     </Layout>
   )
