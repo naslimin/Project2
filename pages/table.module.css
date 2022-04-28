@@ -1,0 +1,79 @@
+.HeaderTitleBox {
+    min-width: 489px;
+    min-height: 41px;
+    font-family: Zilla Slab, 'Noto Sans Thai', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    color: #FFFFFF;
+    font-size: 19px;
+    padding-left: 15px;
+    line-height: 41px;
+    background: rgba(219, 171, 0, 0.7);
+    border-radius: 20px;
+}
+.onclick{
+    cursor: pointer;
+}
+.onclick:hover{
+    cursor: pointer;
+    color: cadetblue;
+}
+.form {
+    min-width: 451px;
+    min-height: 476px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background: #FFFFFF;
+    border-radius: 20px;
+    position: relative;
+    padding: 25px;
+}
+
+.titleBox {
+    width: 100%;
+}
+
+.titleText {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-family: Alegreya Sans, 'Noto Sans Thai', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: normal;
+    margin-bottom: 15px;
+}
+.titleText2 {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-family: Alegreya Sans, 'Noto Sans Thai', sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: normal;
+}
+
+.mt10{
+    margin-bottom: 10px;
+}
+.oneYearDay{
+    position: absolute;
+    background: #C4C4C4;
+    bottom: -15px;
+    right: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-size: 18px;
+}
+
+.table{
+    font-size: 12px;
+    width: 100%;
+}

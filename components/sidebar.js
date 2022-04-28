@@ -15,6 +15,11 @@ export default function Sidebar(props) {
       name: 'Dashboard'
     },
     {
+      to: 'table',
+      icon: '/menuIcon/dashboard.png',
+      name: 'ตารางสรุปวันลา'
+    },
+    {
       to: 'event',
       icon: '/menuIcon/events.png',
       name: 'Event'
@@ -27,7 +32,7 @@ export default function Sidebar(props) {
     {
       to: 'leaveform',
       icon: '/menuIcon/leaveform.png',
-      name: 'แบบฟร์อมการลางาน'
+      name: 'แบบฟอร์มการลางาน'
     },
     {
       to: 'setting',
