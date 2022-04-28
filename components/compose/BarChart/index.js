@@ -27,6 +27,14 @@ const initialState = {
       borderWidth: 0,
       maxBarThickness: 10,
       data: Array(12).fill(0)
+    },
+    {
+      label: 'มาสาย',
+      backgroundColor: '#f44336',
+      borderColor: '#f44336',
+      borderWidth: 0,
+      maxBarThickness: 10,
+      data: Array(12).fill(0)
     }
   ],
 };
@@ -68,6 +76,7 @@ class Graph extends React.Component {
         Object.entries(element).forEach(e=>{
           var month = e[0]
           Object.entries(e[1]).forEach(ee=>{
+            console.log(ee)
             initialState.datasets[initialState.datasets.findIndex(f=>f.label == ee[0])].data[month] = ee[1]
           })
         })

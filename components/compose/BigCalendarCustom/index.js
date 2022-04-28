@@ -58,6 +58,43 @@ class MyCustomDateHeader extends React.Component {
               end: null,
               type: 'checkrate'
             }
+
+            fire.firestore().collection(`${user.email}/leavehistory/${moment().format('YYYY')}`)
+              .doc(`${moment().format('MM')}`).get().then(async (doc) => {
+                if (doc.exists) {
+                  fire.firestore().collection(`${user.email}/leavehistory/${moment().format('YYYY')}`)
+                    .doc(`${moment().format('MM')}`)
+                    .update({
+                      'มาสาย': fire.firestore.FieldValue.increment(1)
+                    })
+                    .then(() => {
+                      console.log("Document successfully written!");
+                    })
+                } else {
+                  fire.firestore().collection(`${user.email}/leavehistory/${moment().format('YYYY')}`)
+                    .doc(`${moment().format('MM')}`)
+                    .set({
+                      'มาสาย': fire.firestore.FieldValue.increment(1)
+                    })
+                    .then(() => {
+                      console.log("Document successfully written!");
+                    })
+                }
+              }).catch((error) => {
+                console.log("Error getting document:", error);
+              });
+
+            var month = moment().format('MM')
+            fire.firestore().collection(`${user.email}/dashboard/${moment().format('YYYY')}`)
+              .add({
+                type: 'มาสาย',
+                month: month,
+                total_days: 1,
+                refid: null
+              })
+              .then(() => {
+                console.log("Document successfully update written!");
+              })
           }
           fire.firestore().collection(`${user.email}/history/${moment().format('YYYY-MM')}`)
             .doc(`${moment().format('DD')}`)
@@ -65,6 +102,7 @@ class MyCustomDateHeader extends React.Component {
             .then(() => {
               this.props.props.setShowAlert(false);
               this.props.props.getEvent()
+
             })
             .catch((error) => {
               console.log(error)
@@ -183,7 +221,7 @@ const ListEvents = () => {
   }
   if (events.length == 0) {
     return <>
-      <h5 class="text-center">No Events Data</h5><br/>
+      <h5 class="text-center">No Events Data</h5><br />
     </>
   } else {
     return events.reverse().map((element, i) => {

@@ -10,7 +10,7 @@ export default function Dashboard(props) {
   const [listM, setM] = useState(["มกราคม", "กุมภาพันธ์", "มีนาคม",
     "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน",
     "ตุลาคม", "พฤศจิกายน", "ธันวาคม"])
-    
+
   const [listData, setListData] = useState(false)
   const router = useRouter()
   var total_days_sum = 0
@@ -44,6 +44,10 @@ export default function Dashboard(props) {
           "ลาคลอดบุตร": {
             hit: 0,
             data: []
+          },
+          "มาสาย": {
+            hit: 0,
+            data: []
           }
         }
         querySnapshot.forEach((doc) => {
@@ -69,19 +73,25 @@ export default function Dashboard(props) {
   //   }
   // },[listData])
 
-  const renderList = (listData,title) => {
-    
+  const renderList = (listData, title) => {
+
     return (
       <>
         <p className={styles.titleText}>{title} {listData.hit} ครั้ง</p>
         <div className={styles.mt10}>
           {
-            listData.data.map((listD,index) => {
+            listData.data.map((listD, index) => {
               var mouth = moment(moment().format(`YYYY-${listD.month}-DD`)).month()
-              total_days_sum+=listD.total_days
-              return (
-                <p onClick={() => router.push(`/pdf?id=${listD.refid}`)} className={`${styles.titleText2} ${styles.onclick}`}>ครั้งที่ {index + 1} เดือน{listM[mouth]}   เป็นจำนวน {listD.total_days} วัน</p>
-              )
+              if (listD.refid) {
+                total_days_sum += listD.total_days
+                return (
+                  <p onClick={() => router.push(`/pdf?id=${listD.refid}`)} className={`${styles.titleText2} ${styles.onclick}`}>ครั้งที่ {index + 1} เดือน{listM[mouth]}   เป็นจำนวน {listD.total_days} วัน</p>
+                )
+              } else {
+                return (
+                  <p className={`${styles.titleText2} ${styles.onclick}`}>ครั้งที่ {index + 1} เดือน{listM[mouth]}  มาสายจำนวน {listD.total_days} วัน</p>
+                )
+              }
             })
           }
         </div>
@@ -100,22 +110,26 @@ export default function Dashboard(props) {
             <div className={`${styles.form}`}>
               {
                 listData && listData["ลาป่วย"].data.length > 0 ?
-                  renderList(listData["ลาป่วย"],'ลาป่วย')
+                  renderList(listData["ลาป่วย"], 'ลาป่วย')
                   : null
               }
               {
-                listData && listData["ลากิจส่วนตัว"].data.length > 0?
-                  renderList(listData["ลากิจส่วนตัว"],'ลากิจส่วนตัว')
+                listData && listData["ลากิจส่วนตัว"].data.length > 0 ?
+                  renderList(listData["ลากิจส่วนตัว"], 'ลากิจส่วนตัว')
                   : null
               }
               {
-                listData && listData["ลาคลอดบุตร"].data.length > 0?
-                  renderList(listData["ลาคลอดบุตร"],'ลาคลอดบุตร')
+                listData && listData["ลาคลอดบุตร"].data.length > 0 ?
+                  renderList(listData["ลาคลอดบุตร"], 'ลาคลอดบุตร')
                   : null
               }
-
+              {
+                listData && listData["มาสาย"].data.length > 0 ?
+                  renderList(listData["มาสาย"], 'มาสาย')
+                  : null
+              }
               <div className={styles.oneYearDay}>
-              รวมการลางานใน 1 ปีงบประมาณ จำนวน {total_days_sum} วัน
+                รวมการลางานใน 1 ปีงบประมาณ จำนวน {total_days_sum} วัน
               </div>
             </div>
           </section>
