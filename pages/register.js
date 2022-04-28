@@ -24,6 +24,9 @@ export default function Register(props) {
   const registerSend = () => {
     props.setAlertInner(<><img width={60} height={60} src='/icon/loading-buffering.gif' /></>)
     props.setShowAlert(true);
+    fire.firestore().collection('collection').add({
+      "user_email":state.Email
+    })
     fire.auth().createUserWithEmailAndPassword(state.Email, state.Password)
       .then(async (userCredential) => {
         var user = userCredential.user;
