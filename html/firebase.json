@@ -52,6 +52,14 @@
         "destination": "/index_gps.html"
       },
       {
+        "source": "/index_gps_home",
+        "destination": "/index_gps_home.html"
+      },
+      {
+        "source": "/index_gps_home_dev",
+        "destination": "/index_gps_home_dev.html"
+      },
+      {
         "source": "**",
         "destination": "/404.html"
       }

@@ -107,7 +107,7 @@ export default function Index(props) {
   const checkLocation = () => {
     console.log('school')
     console.log(latitude_longitude.latitude, latitude_longitude.longitude, polygon_school)
-
+    
     return isPointInPolygon(latitude_longitude.latitude, latitude_longitude.longitude, polygon_school) ? 'Yes' : 'No'
   }
 
@@ -127,19 +127,13 @@ export default function Index(props) {
   // ]
 
   const polygon_school = [
-    [6.5642434, 101.5367861],
-    [6.5641932, 101.5366668],
-    [6.5638145, 101.5370617],
-    [6.5636420, 101.5372636],
-    [6.5635021, 101.5375236],
-    [6.5634387, 101.5379176],
-    [6.5639723, 101.5379822],
-    [6.5644627, 101.5373306],
-    [6.5646072, 101.5370390],
-    [6.5644113, 101.5368716],
-    [6.5642434, 101.5367861],
+    [7.897680, 98.354064],
+    [7.897713, 98.354273],
+    [7.897385, 98.354329],
+    [7.897322, 98.354097],
+    [7.897680, 98.354064]
   ]
-
+  
 
   // const polygon_dev = [
   //   [
@@ -210,15 +204,15 @@ export default function Index(props) {
             {/* {
               !isDev ?
                 <> */}
-            {
-              checkLocation() == "Yes" ?
-                <div onClick={() => loginCheck()} className={`${styles.loginBTN} fontText`}>Login</div>
-                :
-                <div className='text-center'>
-                  <small>อยู่นอกพื้นที่ใช้งานระบบ</small>
-                </div>
-            }
-            {/* </>
+                  {
+                    checkLocation() == "Yes" ?
+                      <div onClick={() => loginCheck()} className={`${styles.loginBTN} fontText`}>Login</div>
+                      :
+                      <div className='text-center'>
+                        <small>อยู่นอกพื้นที่ใช้งานระบบ</small>
+                      </div>
+                  }
+                {/* </>
                 :
                 <>
                   {
